@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class ShowDate {
     @Column(length = 10)
     private Integer showDateId;
 
-    private Date showDate;
+    private LocalDate showDate;
 
     private String dateName;
 
