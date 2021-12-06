@@ -2,6 +2,7 @@ package fpt.trainining.movietheatre.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -12,7 +13,13 @@ import javax.persistence.*;
 public class Member {
 
     @Id
-    @Column(length = 10)
+    @Column(name = "member_id",length = 10)
+    @GeneratedValue(generator = "member-generator")
+    @GenericGenerator(
+            name = "member-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "MEM"),
+            strategy = "fpt.trainining.movietheatre.generator.MyGenerator"
+    )
     private String memberId;
 
     @Column(length = 10)
