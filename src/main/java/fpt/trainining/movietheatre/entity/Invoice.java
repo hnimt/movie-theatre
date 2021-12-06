@@ -2,11 +2,10 @@ package fpt.trainining.movietheatre.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "invoice")
@@ -16,6 +15,12 @@ public class Invoice {
 
     @Id
     @Column(name = "invoice_id", length = 10)
+    @GeneratedValue(generator = "invoice-generator")
+    @GenericGenerator(
+            name = "invoice-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "INV"),
+            strategy = "fpt.trainining.movietheatre.generator.MyGenerator"
+    )
     private String invoiceId;
 
     @ManyToOne

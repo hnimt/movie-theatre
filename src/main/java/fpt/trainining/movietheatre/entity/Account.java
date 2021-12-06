@@ -2,10 +2,11 @@ package fpt.trainining.movietheatre.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
@@ -15,6 +16,12 @@ public class Account {
 
     @Id
     @Column(name = "account_id", length = 10)
+    @GeneratedValue(generator = "account-generator")
+    @GenericGenerator(
+            name = "account-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "ACC"),
+            strategy = "fpt.trainining.movietheatre.generator.MyGenerator"
+    )
     private String accountId;
 
     private String address;

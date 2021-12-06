@@ -3,6 +3,7 @@ package fpt.trainining.movietheatre.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,6 +19,12 @@ public class Movie {
 
     @Id
     @Column(length = 10)
+    @GeneratedValue(generator = "movie-generator")
+    @GenericGenerator(
+            name = "movie-generator",
+            parameters = @org.hibernate.annotations.Parameter(name = "prefix", value = "MOV"),
+            strategy = "fpt.trainining.movietheatre.generator.MyGenerator"
+    )
     private String movieId;
 
     private String actor;
