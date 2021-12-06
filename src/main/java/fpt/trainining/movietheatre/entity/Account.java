@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,7 +19,7 @@ public class Account {
 
     private String address;
 
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private String email;
 
@@ -34,7 +35,7 @@ public class Account {
 
     private String phoneNumber;
 
-    private Date registerDate;
+    private LocalDate registerDate;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

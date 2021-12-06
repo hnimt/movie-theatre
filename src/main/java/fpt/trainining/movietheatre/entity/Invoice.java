@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,13 +26,13 @@ public class Invoice {
     private Integer addScore;
 
     @Column(name = "booking_date")
-    private Timestamp bookingDate;
+    private LocalDateTime bookingDate;
 
     @Column(name = "movie_name")
     private String movieName;
 
     @Column(name = "schedule_show")
-    private Date scheduleShow;
+    private LocalDateTime scheduleShow;
 
     @Column(name = "schedule_show_time")
     private String scheduleShowTime;

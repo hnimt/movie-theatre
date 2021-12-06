@@ -15,7 +15,7 @@ public class Employee {
     @Column(length = 10)
     private String employeeId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
 }

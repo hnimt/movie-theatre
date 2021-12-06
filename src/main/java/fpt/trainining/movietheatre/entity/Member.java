@@ -18,7 +18,7 @@ public class Member {
     @Column(length = 10)
     private Integer score;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
 }

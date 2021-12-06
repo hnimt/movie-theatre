@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -30,11 +31,11 @@ public class Movie {
 
     private Integer duration;
 
-    private Date fromDate;
+    private LocalDate fromDate;
 
     private String movieProductionCompany;
 
-    private Date toDate;
+    private LocalDate toDate;
 
     private String version;
 

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Collection;
 
 @Entity
@@ -18,7 +19,7 @@ public class Schedule {
     @Column(length = 10)
     private Integer scheduleId;
 
-    private String scheduleTime;
+    private LocalTime scheduleTime;
 
     @ManyToMany(mappedBy = "schedules")
     private Collection<Movie> movies;

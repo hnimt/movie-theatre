@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "promotion")
@@ -26,11 +27,11 @@ public class Promotion {
     @Column(length = 10)
     private Integer discountLevel;
 
-    private Timestamp endTime;
+    private LocalDateTime endTime;
 
     private String image;
 
-    private Timestamp startTime;
+    private LocalDateTime startTime;
 
     private String title;
 }
