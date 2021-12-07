@@ -2,6 +2,7 @@ package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
 import fpt.trainining.movietheatre.dto.member.MemberCreateReq;
+import fpt.trainining.movietheatre.dto.member.MemberUpdateScoreReq;
 import fpt.trainining.movietheatre.service.mapper.MemberMapper;
 import fpt.trainining.movietheatre.entity.Member;
 import fpt.trainining.movietheatre.service.MemberService;

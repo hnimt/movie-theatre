@@ -33,7 +33,7 @@ public class AccountController {
 
     @PutMapping("/{id}")
     public ResponseEntity updateAccount(@PathVariable String id, @RequestBody AccountUpdateReq accountUpdateReq) {
-        Account account = accountMapper.accountUpdateReqToAccount(accountUpdateReq);
+        Account account = accountMapper.accountUpdateReqToAccount(id, accountUpdateReq);
         Account result = accountService.save(account);
         return ResponseHandler.generateResponse("Update Successfully!", HttpStatus.OK, result);
     }

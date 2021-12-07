@@ -4,9 +4,8 @@ import fpt.trainining.movietheatre.dto.account.AccountRegisterReq;
 import fpt.trainining.movietheatre.dto.account.AccountUpdateReq;
 import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.entity.Role;
+import fpt.trainining.movietheatre.service.AccountService;
 import fpt.trainining.movietheatre.service.RoleService;
-import org.dom4j.rule.Mode;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import java.time.LocalDate;
 public class AccountMapper {
 
     @Autowired private RoleService roleService;
-    @Autowired private ModelMapper mapper;
+    @Autowired private AccountService accountService;
 
     public Account accountRegisterReqToAccount(AccountRegisterReq accountRegisterDto) {
         Account account = new Account();
@@ -34,8 +33,17 @@ public class AccountMapper {
         return account;
     }
 
-    public Account accountUpdateReqToAccount(AccountUpdateReq accountUpdateReq) {
-        Account account = mapper.map(accountUpdateReq, Account.class);
+    public Account accountUpdateReqToAccount(String accountId, AccountUpdateReq accountUpdateReq) {
+        Account account = accountService.findById(accountId);
+        account.setAddress(accountUpdateReq.getAddress());
+        account.setDateOfBirth(accountUpdateReq.getDateOfBirth());
+        account.setEmail(accountUpdateReq.getEmail());
+        account.setFullName(accountUpdateReq.getFullName());
+        account.setGender(accountUpdateReq.getGender());
+        account.setIdentityCard(accountUpdateReq.getIdentityCard());
+        account.setImage(accountUpdateReq.getIdentityCard());
+        account.setPhoneNumber(accountUpdateReq.getPhoneNumber());
+
         if (accountUpdateReq.getRoleName() != null) {
             Role role = roleService.findByRoleName(accountUpdateReq.getRoleName());
             account.setRole(role);
