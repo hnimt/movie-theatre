@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.entity;
 
+import fpt.trainining.movietheatre.entity.common.DayName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,14 +16,14 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class ShowDate {
-
     @Id
     @Column(length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer showDateId;
 
     private LocalDate showDate;
 
-    private String dateName;
+    private String dayName;
 
     @ManyToMany(mappedBy = "showDates")
     private Collection<Movie> movies;
