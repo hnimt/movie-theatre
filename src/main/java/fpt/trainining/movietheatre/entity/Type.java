@@ -16,6 +16,7 @@ public class Type {
 
     @Id
     @Column(length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer typeId;
 
     private String typeName;
