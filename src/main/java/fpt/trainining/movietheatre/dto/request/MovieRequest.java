@@ -39,9 +39,12 @@ public class MovieRequest {
 
     private String smallImage;
 
+    @NotNull
     private Set<Integer> showDateId;
 
+    @NotNull
     private Set<Integer> scheduleId;
 
+    @NotNull
     private Set<Integer> typeId;
 }

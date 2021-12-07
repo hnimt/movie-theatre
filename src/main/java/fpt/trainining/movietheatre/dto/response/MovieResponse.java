@@ -1,9 +1,14 @@
 package fpt.trainining.movietheatre.dto.response;
 
+import fpt.trainining.movietheatre.entity.Schedule;
+import fpt.trainining.movietheatre.entity.ShowDate;
+import fpt.trainining.movietheatre.entity.Type;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Collection;
 import java.util.Set;
 
 @Data
@@ -34,9 +39,9 @@ public class MovieResponse {
 
     private String smallImage;
 
-    private Set<Integer> showDateId;
+    private Set<LocalDate> showDates;
 
-    private Set<Integer> scheduleId;
+    private Set<LocalTime> scheduleTimes;
 
-    private Set<Integer> typeId;
+    private Set<String> typeNames;
 }
