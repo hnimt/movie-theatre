@@ -17,6 +17,7 @@ public class Schedule {
 
     @Id
     @Column(length = 10)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer scheduleId;
 
     private LocalTime scheduleTime;
