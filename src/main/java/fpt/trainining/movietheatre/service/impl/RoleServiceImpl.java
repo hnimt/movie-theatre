@@ -3,14 +3,15 @@ package fpt.trainining.movietheatre.service.impl;
 import fpt.trainining.movietheatre.entity.Role;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.RoleRepository;
-import fpt.trainining.movietheatre.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
-public class RoleService implements IRoleService {
+@Primary
+public class RoleServiceImpl implements fpt.trainining.movietheatre.service.RoleService {
 
     @Autowired private RoleRepository roleRepository;
 
@@ -33,5 +34,11 @@ public class RoleService implements IRoleService {
     @Override
     public void remove(Object id) {
         roleRepository.deleteById((Integer) id);
+    }
+
+    @Override
+    public Role findByRoleName(String roleName) {
+        return roleRepository.findByRoleName(roleName)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found role name " +roleName));
     }
 }

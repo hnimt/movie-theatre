@@ -3,7 +3,7 @@ package fpt.trainining.movietheatre.service;
 import java.util.Collection;
 import java.util.Objects;
 
-public interface IService<T> {
+public interface GeneralService<T> {
     Collection<T> findAll();
 
     T findById(Object id);

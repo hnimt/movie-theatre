@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 public class Account {
 
     @Id
-    @Column(name = "account_id", length = 10)
+    @Column(name = "account_id", length = 10, unique = true)
     @GeneratedValue(generator = "account-generator")
     @GenericGenerator(
             name = "account-generator",
@@ -24,24 +23,17 @@ public class Account {
     )
     private String accountId;
 
-    private String address;
-
-    private LocalDate dateOfBirth;
-
-    private String email;
-
-    private String fullName;
-
-    private String gender;
-
-    private String identityCard;
-
-    private String image;
-
+    @Column(unique = true)
+    private String username;
     private String password;
-
+    private String address;
+    private LocalDate dateOfBirth;
+    private String email;
+    private String fullName;
+    private String gender;
+    private String identityCard;
+    private String image;
     private String phoneNumber;
-
     private LocalDate registerDate;
 
     @ManyToOne
@@ -50,6 +42,4 @@ public class Account {
 
     @Column(length = 1)
     private Integer status;
-
-    private String username;
 }

@@ -3,14 +3,15 @@ package fpt.trainining.movietheatre.service.impl;
 import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.AccountRepository;
-import fpt.trainining.movietheatre.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
-public class AccountService implements IAccountService {
+@Primary
+public class AccountServiceImpl implements fpt.trainining.movietheatre.service.AccountService {
 
     @Autowired private AccountRepository accountRepository;
 
@@ -35,4 +36,9 @@ public class AccountService implements IAccountService {
         accountRepository.deleteById((String) id);
     }
 
+    @Override
+    public Account findByUsername(String username) {
+        return accountRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find account name: " + username));
+    }
 }
