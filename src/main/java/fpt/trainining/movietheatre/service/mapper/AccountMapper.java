@@ -1,5 +1,7 @@
-package fpt.trainining.movietheatre.dto.account;
+package fpt.trainining.movietheatre.service.mapper;
 
+import fpt.trainining.movietheatre.dto.account.AccountRegisterReq;
+import fpt.trainining.movietheatre.dto.account.AccountUpdateReq;
 import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.entity.Role;
 import fpt.trainining.movietheatre.service.RoleService;

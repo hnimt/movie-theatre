@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
-import fpt.trainining.movietheatre.dto.account.AccountMapper;
+import fpt.trainining.movietheatre.service.mapper.AccountMapper;
 import fpt.trainining.movietheatre.dto.account.AccountUpdateReq;
 import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.service.AccountService;
