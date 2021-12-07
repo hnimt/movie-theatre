@@ -10,7 +10,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +25,17 @@ public class ShowDateServiceImpl implements ShowDateService {
     @Override
     public ResponseEntity<List<ShowDateResponse>> getAll() {
         List<ShowDate> showDates = repository.findAll();
+
+        List<ShowDateResponse> responses = showDates.stream()
+                .map(mapper::map)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(responses);
+    }
+
+    @Override
+    public ResponseEntity<List<ShowDateResponse>> getByShowDate(LocalDate showDate) {
+        List<ShowDate> showDates = repository.getShowDateByShowDate(showDate);
 
         List<ShowDateResponse> responses = showDates.stream()
                 .map(mapper::map)

@@ -4,10 +4,12 @@ import fpt.trainining.movietheatre.dto.request.ShowDateRequest;
 import fpt.trainining.movietheatre.dto.response.ShowDateResponse;
 import fpt.trainining.movietheatre.service.ShowDateService;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,6 +21,14 @@ public class ShowDateController {
     @GetMapping("/get")
     public ResponseEntity<List<ShowDateResponse>> getAll() {
         return service.getAll();
+    }
+
+    @GetMapping("/get/{show-date}")
+    public ResponseEntity<List<ShowDateResponse>> getByShowDate(
+            @PathVariable("show-date")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate showDate
+    ) {
+        return service.getByShowDate(showDate);
     }
 
     @PostMapping("/create")
