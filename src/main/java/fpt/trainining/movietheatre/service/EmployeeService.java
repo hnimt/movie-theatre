@@ -1,7 +1,14 @@
 package fpt.trainining.movietheatre.service;
 
-import fpt.trainining.movietheatre.entity.Employee;
+import fpt.trainining.movietheatre.dto.employee.EmployeeReq;
+import fpt.trainining.movietheatre.dto.employee.EmployeeRes;
 
-public interface EmployeeService extends GeneralService<Employee> {
-    void deleteEmployee(String employeeId);
+import java.util.List;
+
+public interface EmployeeService {
+    List<EmployeeRes> findAll();
+    EmployeeRes findById(String id);
+    //    MemberRes findMemberByName();
+    EmployeeRes create(EmployeeReq req);
+    void deleteById(String id);
 }

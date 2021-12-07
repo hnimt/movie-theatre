@@ -1,17 +1,17 @@
 package fpt.trainining.movietheatre.service.impl;
 
+import fpt.trainining.movietheatre.dto.role.RoleCreateReq;
 import fpt.trainining.movietheatre.entity.Role;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.RoleRepository;
+import fpt.trainining.movietheatre.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
-@Primary
-public class RoleServiceImpl implements fpt.trainining.movietheatre.service.RoleService {
+public class RoleServiceImpl implements RoleService {
 
     @Autowired private RoleRepository roleRepository;
 
@@ -21,19 +21,22 @@ public class RoleServiceImpl implements fpt.trainining.movietheatre.service.Role
     }
 
     @Override
-    public Role findById(Object id) {
-        return roleRepository.findById((Integer) id)
+    public Role findById(Integer id) {
+        return roleRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot find role id: " + id));
     }
 
     @Override
-    public Role save(Role role) {
+    public Role create(RoleCreateReq roleCreateReq) {
+        Role role = Role.builder()
+                .roleName(roleCreateReq.getRoleName())
+                .build();
         return roleRepository.save(role);
     }
 
     @Override
-    public void remove(Object id) {
-        roleRepository.deleteById((Integer) id);
+    public void remove(Integer id) {
+        roleRepository.deleteById(id);
     }
 
     @Override

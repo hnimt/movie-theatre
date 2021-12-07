@@ -1,10 +1,8 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
-import fpt.trainining.movietheatre.dto.member.MemberCreateReq;
-import fpt.trainining.movietheatre.dto.member.MemberUpdateScoreReq;
-import fpt.trainining.movietheatre.service.mapper.MemberMapper;
-import fpt.trainining.movietheatre.entity.Member;
+import fpt.trainining.movietheatre.dto.member.MemberReq;
+import fpt.trainining.movietheatre.dto.member.MemberRes;
 import fpt.trainining.movietheatre.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,36 +16,34 @@ import java.util.List;
 public class MemberController {
 
     @Autowired private MemberService memberService;
-    @Autowired private MemberMapper memberMapper;
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Member> members = (List<Member>) memberService.findAll();
-        return ResponseHandler.generateResponse("Find all members successfully!", HttpStatus.OK, members);
+        List<MemberRes> res = memberService.findAll();
+        return ResponseHandler.generateResponse("Find all members successfully!", HttpStatus.OK, res);
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody MemberCreateReq memberCreateReq) {
-        Member member = memberMapper.memberCreateReqToMember(memberCreateReq);
-        Member result = memberService.save(member);
-        return ResponseHandler.generateResponse("Create member successfully!", HttpStatus.CREATED, result);
+    public ResponseEntity create(@RequestBody MemberReq req) {
+        MemberRes res = memberService.createMember(req);
+        return ResponseHandler.generateResponse("Create member successfully!", HttpStatus.CREATED, res);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable String id){
-        Member member = memberService.findById(id);
-        return ResponseHandler.generateResponse("Find member successfully!", HttpStatus.OK, member);
+        MemberRes res = memberService.findById(id);
+        return ResponseHandler.generateResponse("Find member successfully!", HttpStatus.OK, res);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateMemberScore(@PathVariable String id, @RequestBody MemberUpdateScoreReq memberUpdateScoreReq) {
-        Member member = memberService.updateMemberScore(id, memberUpdateScoreReq.getScore());
-        return ResponseHandler.generateResponse("Update member's score successfully!", HttpStatus.OK, member);
+    public ResponseEntity updateMember(@PathVariable String id, @RequestBody MemberReq req) {
+        MemberRes res = memberService.updateMember(id, req);
+        return ResponseHandler.generateResponse("Update member's score successfully!", HttpStatus.OK, res);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable String id) {
-        memberService.deleteMember(id);
+        memberService.deleteById(id);
         return ResponseHandler.generateResponse("Delete successfully!", HttpStatus.OK, null);
     }
 }

@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EmployeeCreateReq {
+public class EmployeeReq {
     private String accountId;
 }

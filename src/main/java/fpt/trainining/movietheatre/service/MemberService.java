@@ -1,8 +1,15 @@
 package fpt.trainining.movietheatre.service;
 
-import fpt.trainining.movietheatre.entity.Member;
+import fpt.trainining.movietheatre.dto.member.MemberReq;
+import fpt.trainining.movietheatre.dto.member.MemberRes;
 
-public interface MemberService extends GeneralService<Member> {
-    Member updateMemberScore(String memberId, Integer score);
-    void deleteMember(String memberId);
+import java.util.List;
+
+public interface MemberService {
+    List<MemberRes> findAll();
+    MemberRes findById(String id);
+//    MemberRes findMemberByName();
+    MemberRes createMember(MemberReq req);
+    MemberRes updateMember(String id, MemberReq req);
+    void deleteById(String id);
 }

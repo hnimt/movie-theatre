@@ -1,10 +1,9 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
-import fpt.trainining.movietheatre.dto.employee.EmployeeCreateReq;
-import fpt.trainining.movietheatre.entity.Employee;
+import fpt.trainining.movietheatre.dto.employee.EmployeeReq;
+import fpt.trainining.movietheatre.dto.employee.EmployeeRes;
 import fpt.trainining.movietheatre.service.EmployeeService;
-import fpt.trainining.movietheatre.service.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +16,22 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired private EmployeeService employeeService;
-    @Autowired private EmployeeMapper employeeMapper;
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Employee> employees = (List<Employee>) employeeService.findAll();
-        return ResponseHandler.generateResponse("Find all employees successfully!", HttpStatus.OK, employees);
+        List<EmployeeRes> res = employeeService.findAll();
+        return ResponseHandler.generateResponse("Find all employees successfully!", HttpStatus.OK, res);
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody EmployeeCreateReq req) {
-        Employee employee = employeeMapper.employeeCreateReqToEmployee(req);
-        Employee res = employeeService.save(employee);
+    public ResponseEntity create(@RequestBody EmployeeReq req) {
+        EmployeeRes res = employeeService.create(req);
         return ResponseHandler.generateResponse("Create employee successfully!", HttpStatus.CREATED, res);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable String id) {
-        employeeService.deleteEmployee(id);
+        employeeService.deleteById(id);
         return ResponseHandler.generateResponse("Delete employee successfully!", HttpStatus.OK, null);
     }
 

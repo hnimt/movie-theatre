@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MemberCreateReq {
+public class MemberReq {
     private Integer score;
     private String accountId;
 }
