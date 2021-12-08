@@ -51,4 +51,10 @@ public class SeatServiceImpl implements SeatService {
 
         return ResponseEntity.ok(mapper.map(seat));
     }
+
+    @Override
+    public ResponseEntity delete(Integer seatId) {
+        repository.deleteById(seatId);
+        return ResponseEntity.ok("delete successfully");
+    }
 }

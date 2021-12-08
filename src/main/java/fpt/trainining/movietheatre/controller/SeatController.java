@@ -31,4 +31,9 @@ public class SeatController {
     public ResponseEntity<SeatRes> changeType(@RequestBody @Valid SeatChangeTypeReq req) {
         return service.changeType(req);
     }
+
+    @DeleteMapping("/delete/{seat-id}")
+    public ResponseEntity delete(@PathVariable(name = "seat-id") Integer seatId) {
+        return service.delete(seatId);
+    }
 }

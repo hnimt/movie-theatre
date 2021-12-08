@@ -11,4 +11,5 @@ public interface SeatService {
     ResponseEntity<List<SeatRes>> getAll();
     ResponseEntity<SeatRes> create(SeatReq req);
     ResponseEntity<SeatRes> changeType(SeatChangeTypeReq req);
+    ResponseEntity delete(Integer seatId);
 }
