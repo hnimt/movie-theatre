@@ -1,10 +1,9 @@
 package fpt.trainining.movietheatre.service.impl;
 
+import fpt.trainining.movietheatre.dto.seat.SeatIdReq;
 import fpt.trainining.movietheatre.dto.seat.SeatReq;
 import fpt.trainining.movietheatre.dto.seat.SeatRes;
-import fpt.trainining.movietheatre.entity.CinemaRoom;
 import fpt.trainining.movietheatre.entity.Seat;
-import fpt.trainining.movietheatre.repository.CinemaRoomRepository;
 import fpt.trainining.movietheatre.repository.SeatRepository;
 import fpt.trainining.movietheatre.service.SeatService;
 import fpt.trainining.movietheatre.service.mapper.SeatMapper;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,5 +38,31 @@ public class SeatServiceImpl implements SeatService {
         repository.save(seat);
 
         return ResponseEntity.ok(mapper.map(seat));
+    }
+
+    @Override
+    public ResponseEntity<SeatRes> changeType(SeatIdReq req) {
+        Seat seat = mapper.map(req);
+        seat.setSeatType(1 - seat.getSeatType());
+
+        repository.save(seat);
+
+        return ResponseEntity.ok(mapper.map(seat));
+    }
+
+    @Override
+    public ResponseEntity<SeatRes> changeStatus(SeatIdReq req) {
+        Seat seat = mapper.map(req);
+        seat.setSeatStatus(1 - seat.getSeatStatus());
+
+        repository.save(seat);
+
+        return ResponseEntity.ok(mapper.map(seat));
+    }
+
+    @Override
+    public ResponseEntity delete(Integer seatId) {
+        repository.deleteById(seatId);
+        return ResponseEntity.ok("delete successfully");
     }
 }

@@ -20,9 +20,6 @@ public class ApplicationStartupRunner implements CommandLineRunner {
     private final ShowDateService showDateService;
     private final ScheduleService scheduleService;
 
-    private final RoleService roleService;
-    private final AccountService accountService;
-
     @Override
     public void run(String... args) throws Exception {
         TypeRequest typeRequest = new TypeRequest();
@@ -50,12 +47,6 @@ public class ApplicationStartupRunner implements CommandLineRunner {
         scheduleService.create(scheduleRequest);
         scheduleRequest.setScheduleTime(LocalTime.of(20, 40));
         scheduleService.create(scheduleRequest);
-
-        RoleCreateReq roleCreateReq = new RoleCreateReq("ADMIN");
-        roleService.create(roleCreateReq);
-
-//        AccountRegisterReq accountRegisterReq = new AccountRegisterReq("quang", "123", "ADMIN");
-//        accountService.createAccount(accountRegisterReq);
     }
 
 }

@@ -15,5 +15,15 @@ INSERT INTO `movie_theatre`.`member`(`member_id`,`score`,`account_id`) VALUES ('
 
 INSERT INTO `movie_theatre`.`employee`(`employee_id`,`account_id`) VALUES ('EMP0001','ACC0004');
 
+-- INSERT INTO `movie_theatre`.`seat`(`seat_column`, `seat_row`, `seat_status`, `seat_type`, `cinema_room_id`) VALUES ('A', 1, 0, 0, 1);
+-- INSERT INTO `movie_theatre`.`seat`(`seat_column`, `seat_row`, `seat_status`, `seat_type`, `cinema_room_id`) VALUES ('A', 2, 0, 0, 1);
+-- INSERT INTO `movie_theatre`.`seat`(`seat_column`, `seat_row`, `seat_status`, `seat_type`, `cinema_room_id`) VALUES ('A', 3, 0, 0, 1);
+-- INSERT INTO `movie_theatre`.`seat`(`seat_column`, `seat_row`, `seat_status`, `seat_type`, `cinema_room_id`) VALUES ('A', 4, 0, 0, 1);
+
+INSERT INTO `movie_theatre`.`cinema_room`(`cinema_room_name`, `seat_quantity`) VALUES ('Room 1', 4);
+INSERT INTO `movie_theatre`.`cinema_room`(`cinema_room_name`, `seat_quantity`) VALUES ('Room 2', 0);
+INSERT INTO `movie_theatre`.`cinema_room`(`cinema_room_name`, `seat_quantity`) VALUES ('Room 3', 0);
+INSERT INTO `movie_theatre`.`cinema_room`(`cinema_room_name`, `seat_quantity`) VALUES ('Room 4', 0);
+
 
 
