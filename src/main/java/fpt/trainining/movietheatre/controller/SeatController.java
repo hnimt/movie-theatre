@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.controller;
 
+import fpt.trainining.movietheatre.dto.seat.SeatChangeTypeReq;
 import fpt.trainining.movietheatre.dto.seat.SeatReq;
 import fpt.trainining.movietheatre.dto.seat.SeatRes;
 import fpt.trainining.movietheatre.service.SeatService;
@@ -24,5 +25,10 @@ public class SeatController {
     @PostMapping("/create")
     public ResponseEntity<SeatRes> create(@RequestBody @Valid SeatReq req) {
         return service.create(req);
+    }
+
+    @PutMapping("/change-type")
+    public ResponseEntity<SeatRes> changeType(@RequestBody @Valid SeatChangeTypeReq req) {
+        return service.changeType(req);
     }
 }

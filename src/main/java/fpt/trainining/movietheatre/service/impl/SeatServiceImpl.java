@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.service.impl;
 
+import fpt.trainining.movietheatre.dto.seat.SeatChangeTypeReq;
 import fpt.trainining.movietheatre.dto.seat.SeatReq;
 import fpt.trainining.movietheatre.dto.seat.SeatRes;
 import fpt.trainining.movietheatre.entity.CinemaRoom;
@@ -35,6 +36,15 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public ResponseEntity<SeatRes> create(SeatReq req) {
+        Seat seat = mapper.map(req);
+
+        repository.save(seat);
+
+        return ResponseEntity.ok(mapper.map(seat));
+    }
+
+    @Override
+    public ResponseEntity<SeatRes> changeType(SeatChangeTypeReq req) {
         Seat seat = mapper.map(req);
 
         repository.save(seat);

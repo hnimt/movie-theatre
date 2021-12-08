@@ -1,11 +1,13 @@
 package fpt.trainining.movietheatre.service.mapper;
 
+import fpt.trainining.movietheatre.dto.seat.SeatChangeTypeReq;
 import fpt.trainining.movietheatre.dto.seat.SeatReq;
 import fpt.trainining.movietheatre.dto.seat.SeatRes;
 import fpt.trainining.movietheatre.entity.CinemaRoom;
 import fpt.trainining.movietheatre.entity.Seat;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.CinemaRoomRepository;
+import fpt.trainining.movietheatre.repository.SeatRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SeatMapper {
     private final ModelMapper mapper;
+    private final SeatRepository repository;
     private final CinemaRoomRepository cinemaRoomRepository;
 
     public Seat map(SeatReq req) {
@@ -33,6 +36,18 @@ public class SeatMapper {
         cinemaRoomRepository.save(cinemaRoom);
 
         seat.setCinemaRoom(cinemaRoom);
+
+        return seat;
+    }
+
+    public Seat map(SeatChangeTypeReq req) {
+        Optional<Seat> optionalSeat = repository.findById(req.getSeatId());
+
+        if (!optionalSeat.isPresent()) {
+            throw new ResourceNotFoundException("Can not find seat with id = " + req.getSeatId());
+        }
+        Seat seat = optionalSeat.get();
+        seat.setSeatType(1 - seat.getSeatType());
 
         return seat;
     }
