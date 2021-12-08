@@ -20,8 +20,6 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer scheduleId;
 
+    @Column(unique = true)
     private LocalTime scheduleTime;
-
-//    @ManyToMany(mappedBy = "schedules")
-//    private Collection<Movie> movies;
 }
