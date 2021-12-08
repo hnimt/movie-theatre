@@ -1,5 +1,7 @@
-package fpt.trainining.movietheatre.dto.cinema_room;
+package fpt.trainining.movietheatre.service.mapper;
 
+import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomReq;
+import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomRes;
 import fpt.trainining.movietheatre.entity.CinemaRoom;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

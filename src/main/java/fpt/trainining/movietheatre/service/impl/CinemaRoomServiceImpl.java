@@ -1,6 +1,6 @@
 package fpt.trainining.movietheatre.service.impl;
 
-import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomMapper;
+import fpt.trainining.movietheatre.service.mapper.CinemaRoomMapper;
 import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomReq;
 import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomRes;
 import fpt.trainining.movietheatre.entity.CinemaRoom;

@@ -19,8 +19,6 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer typeId;
 
+    @Column(unique = true)
     private String typeName;
-
-    @ManyToMany(mappedBy = "types")
-    private Collection<Movie> movies;
 }

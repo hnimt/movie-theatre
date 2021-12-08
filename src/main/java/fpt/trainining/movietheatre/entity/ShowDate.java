@@ -23,6 +23,6 @@ public class ShowDate {
 
     private String dayName;
 
-    @ManyToMany(mappedBy = "showDates")
-    private Collection<Movie> movies;
+//    @ManyToMany(mappedBy = "showDates")
+//    private Collection<Movie> movies;
 }

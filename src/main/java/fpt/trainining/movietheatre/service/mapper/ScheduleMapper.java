@@ -3,25 +3,20 @@ package fpt.trainining.movietheatre.service.mapper;
 import fpt.trainining.movietheatre.dto.request.ScheduleRequest;
 import fpt.trainining.movietheatre.dto.response.ScheduleResponse;
 import fpt.trainining.movietheatre.entity.Schedule;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class ScheduleMapper {
+    private final ModelMapper mapper;
+
     public Schedule map(ScheduleRequest request) {
-        Schedule schedule = new Schedule();
-
-        schedule.setScheduleTime(request.getScheduleTime());
-
-        return schedule;
+        return mapper.map(request, Schedule.class);
     }
 
     public ScheduleResponse map(Schedule schedule) {
-        ScheduleResponse response = new ScheduleResponse();
-
-        response.setScheduleId(schedule.getScheduleId());
-        response.setScheduleTime(schedule.getScheduleTime());
-        response.setMovies(schedule.getMovies());
-
-        return response;
+        return mapper.map(schedule, ScheduleResponse.class);
     }
 }

@@ -10,6 +10,7 @@ import fpt.trainining.movietheatre.repository.ScheduleRepository;
 import fpt.trainining.movietheatre.repository.ShowDateRepository;
 import fpt.trainining.movietheatre.repository.TypeRepository;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,24 +20,13 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class MovieMapper {
+    private final ModelMapper mapper;
     private final ShowDateRepository showDateRepository;
     private final ScheduleRepository scheduleRepository;
     private final TypeRepository typeRepository;
 
     public Movie map(MovieRequest request) {
-        Movie movie = new Movie();
-
-        movie.setActor(request.getActor());
-        movie.setCinemaRoomId(request.getCinemaRoomId());
-        movie.setContent(request.getContent());
-        movie.setDirector(request.getDirector());
-        movie.setDuration(request.getDuration());
-        movie.setFromDate(request.getFromDate());
-        movie.setMovieProductionCompany(request.getMovieProductionCompany());
-        movie.setToDate(request.getToDate());
-        movie.setVersion(request.getVersion());
-        movie.setMovieNameEnglish(request.getMovieNameEnglish());
-        movie.setMovieNameVn(request.getMovieNameVn());
+        Movie movie = mapper.map(request, Movie.class);
 
         List<ShowDate> showDates = new ArrayList<>();
         request.getShowDateId().stream().forEach(
@@ -66,37 +56,38 @@ public class MovieMapper {
     }
 
     public MovieResponse map(Movie movie) {
-        MovieResponse response = new MovieResponse();
+//        MovieResponse response = new MovieResponse();
+//
+//        response.setActor(movie.getActor());
+//        response.setCinemaRoomId(movie.getCinemaRoomId());
+//        response.setContent(movie.getContent());
+//        response.setDirector(movie.getDirector());
+//        response.setDuration(movie.getDuration());
+//        response.setFromDate(movie.getFromDate());
+//        response.setMovieProductionCompany(movie.getMovieProductionCompany());
+//        response.setToDate(movie.getToDate());
+//        response.setVersion(movie.getVersion());
+//        response.setMovieNameEnglish(movie.getMovieNameEnglish());
+//        response.setMovieNameVn(movie.getMovieNameVn());
+        MovieResponse response = mapper.map(movie, MovieResponse.class);
 
-        response.setActor(movie.getActor());
-        response.setCinemaRoomId(movie.getCinemaRoomId());
-        response.setContent(movie.getContent());
-        response.setDirector(movie.getDirector());
-        response.setDuration(movie.getDuration());
-        response.setFromDate(movie.getFromDate());
-        response.setMovieProductionCompany(movie.getMovieProductionCompany());
-        response.setToDate(movie.getToDate());
-        response.setVersion(movie.getVersion());
-        response.setMovieNameEnglish(movie.getMovieNameEnglish());
-        response.setMovieNameVn(movie.getMovieNameVn());
-
-        response.setShowDates(
-                movie.getShowDates().stream()
-                        .map(showDate -> showDate.getShowDate())
-                        .collect(Collectors.toSet())
-        );
-
-        response.setScheduleTimes(
-                movie.getSchedules().stream()
-                        .map(schedule -> schedule.getScheduleTime())
-                        .collect(Collectors.toSet())
-        );
-
-        response.setTypeNames(
-                movie.getTypes().stream()
-                        .map(type -> type.getTypeName())
-                        .collect(Collectors.toSet())
-        );
+//        response.setShowDates(
+//                movie.getShowDates().stream()
+//                        .map(showDate -> showDate.getShowDate())
+//                        .collect(Collectors.toSet())
+//        );
+//
+//        response.setScheduleTimes(
+//                movie.getSchedules().stream()
+//                        .map(schedule -> schedule.getScheduleTime())
+//                        .collect(Collectors.toSet())
+//        );
+//
+//        response.setTypeNames(
+//                movie.getTypes().stream()
+//                        .map(type -> type.getTypeName())
+//                        .collect(Collectors.toSet())
+//        );
 
         return response;
     }
