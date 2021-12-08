@@ -3,27 +3,23 @@ package fpt.trainining.movietheatre.service.mapper;
 import fpt.trainining.movietheatre.dto.request.ShowDateRequest;
 import fpt.trainining.movietheatre.dto.response.ShowDateResponse;
 import fpt.trainining.movietheatre.entity.ShowDate;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class ShowDateMapper {
-    public ShowDate map(ShowDateRequest request) {
-        ShowDate showDate = new ShowDate();
+    private final ModelMapper mapper;
 
-        showDate.setShowDate(request.getShowDate());
+    public ShowDate map(ShowDateRequest request) {
+        ShowDate showDate = mapper.map(request, ShowDate.class);
         showDate.setDayName(request.getShowDate().getDayOfWeek().toString());
 
         return showDate;
     }
 
     public ShowDateResponse map(ShowDate showDate) {
-        ShowDateResponse response = new ShowDateResponse();
-
-        response.setShowDateId(showDate.getShowDateId());
-        response.setShowDate(showDate.getShowDate());
-        response.setDayName(showDate.getDayName());
-//        response.setMovies(showDate.getMovies());
-
-        return response;
+        return mapper.map(showDate, ShowDateResponse.class);
     }
 }
