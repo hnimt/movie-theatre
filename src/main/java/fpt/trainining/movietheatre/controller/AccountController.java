@@ -1,11 +1,11 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
-import fpt.trainining.movietheatre.dto.account.AccountMapper;
+import fpt.trainining.movietheatre.dto.account.AccountInfoRes;
 import fpt.trainining.movietheatre.dto.account.AccountUpdateReq;
 import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +14,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/account")
+@AllArgsConstructor
 public class AccountController {
 
-    @Autowired private AccountService accountService;
-    @Autowired private AccountMapper accountMapper;
+    private final AccountService accountService;
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<Account> accounts = (List<Account>) accountService.findAll();
-        return ResponseHandler.generateResponse("Find successfully!", HttpStatus.OK, accounts);
+        List<AccountInfoRes> res = accountService.findAll();
+        return ResponseHandler.generateResponse("Find successfully!", HttpStatus.OK, res);
     }
 
     @GetMapping("/{id}")
@@ -33,14 +33,13 @@ public class AccountController {
 
     @PutMapping("/{id}")
     public ResponseEntity updateAccount(@PathVariable String id, @RequestBody AccountUpdateReq accountUpdateReq) {
-        Account account = accountMapper.accountUpdateReqToAccount(accountUpdateReq);
-        Account result = accountService.save(account);
+        AccountInfoRes result = accountService.updateAccount(id, accountUpdateReq);
         return ResponseHandler.generateResponse("Update Successfully!", HttpStatus.OK, result);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteAccount(@PathVariable String id) {
-        accountService.remove(id);
+        accountService.deleteById(id);
         return ResponseHandler.generateResponse("Delete Successfully!", HttpStatus.OK, null);
     }
 }

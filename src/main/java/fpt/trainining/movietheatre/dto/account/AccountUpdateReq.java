@@ -1,19 +1,15 @@
 package fpt.trainining.movietheatre.dto.account;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class AccountUpdateReq {
-    private String accountId;
-    private String username;
-    private String password;
     private String address;
+    private String password;
     private LocalDate dateOfBirth;
     private String email;
     private String fullName;
@@ -21,7 +17,6 @@ public class AccountUpdateReq {
     private String identityCard;
     private String image;
     private String phoneNumber;
-    private LocalDate registerDate;
-    private String roleName;
     private Integer status;
+    private String roleName;
 }

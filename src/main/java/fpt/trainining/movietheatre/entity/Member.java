@@ -28,4 +28,11 @@ public class Member {
     @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @PrePersist
+    void preInsert() {
+        if (this.score == null) {
+            this.score = 0;
+        }
+    }
 }

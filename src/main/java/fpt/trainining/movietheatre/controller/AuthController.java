@@ -3,14 +3,11 @@ package fpt.trainining.movietheatre.controller;
 import fpt.trainining.movietheatre.dto.ResponseHandler;
 import fpt.trainining.movietheatre.dto.account.AccountInfoRes;
 import fpt.trainining.movietheatre.dto.account.AccountLoginReq;
-import fpt.trainining.movietheatre.dto.account.AccountMapper;
 import fpt.trainining.movietheatre.dto.account.AccountRegisterReq;
-import fpt.trainining.movietheatre.entity.Account;
-import fpt.trainining.movietheatre.service.AccountService;
 import fpt.trainining.movietheatre.security.UserDetailService;
+import fpt.trainining.movietheatre.service.AccountService;
 import fpt.trainining.movietheatre.util.JWTUtility;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +15,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,26 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@AllArgsConstructor
 public class AuthController {
-    @Autowired private JWTUtility jwtUtility;
-    @Autowired private AuthenticationManager authenticationManager;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private AccountService accountService;
-    @Autowired private UserDetailService userDetailService;
-    @Autowired private ModelMapper mapper;
-    @Autowired private AccountMapper accountMapper;
+    private JWTUtility jwtUtility;
+    private AuthenticationManager authenticationManager;
+    private AccountService accountService;
+    private UserDetailService userDetailService;
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody AccountRegisterReq accountRegisterReq) {
-        Account account = accountMapper.accountRegisterReqToAccount(accountRegisterReq);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        Account createdAccount = accountService.save(account);
-
-        UserDetails userDetails = userDetailService.loadUserByUsername(createdAccount.getUsername());
+        AccountInfoRes res = accountService.createAccount(accountRegisterReq);
+        UserDetails userDetails = userDetailService.loadUserByUsername(res.getUsername());
         String jwtToken = jwtUtility.generateToken(userDetails);
-        AccountInfoRes accountInfoRes = mapper.map(createdAccount, AccountInfoRes.class);
-        accountInfoRes.setJwtToken(jwtToken);
-        return ResponseHandler.generateResponse("Register successfully", HttpStatus.CREATED, accountInfoRes);
+        res.setJwtToken(jwtToken);
+        return ResponseHandler.generateResponse("Register successfully", HttpStatus.CREATED, res);
     }
 
     @PostMapping("/login")

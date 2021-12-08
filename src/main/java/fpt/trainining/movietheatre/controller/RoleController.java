@@ -4,7 +4,6 @@ import fpt.trainining.movietheatre.dto.ResponseHandler;
 import fpt.trainining.movietheatre.dto.role.RoleCreateReq;
 import fpt.trainining.movietheatre.entity.Role;
 import fpt.trainining.movietheatre.service.RoleService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import java.util.Collection;
 public class RoleController {
 
     @Autowired private RoleService roleService;
-    @Autowired private ModelMapper mapper;
 
     @GetMapping
     public ResponseEntity findAll() {
@@ -27,8 +25,7 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity create(@RequestBody RoleCreateReq roleCreateReq) {
-        Role role = mapper.map(roleCreateReq, Role.class);
-        Role res = roleService.save(role);
+        Role res = roleService.create(roleCreateReq);
         return ResponseHandler.generateResponse("Create role successfully!", HttpStatus.CREATED, res);
     }
 
