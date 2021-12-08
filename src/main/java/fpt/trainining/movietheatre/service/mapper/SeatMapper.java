@@ -1,6 +1,6 @@
 package fpt.trainining.movietheatre.service.mapper;
 
-import fpt.trainining.movietheatre.dto.seat.SeatChangeTypeReq;
+import fpt.trainining.movietheatre.dto.seat.SeatIdReq;
 import fpt.trainining.movietheatre.dto.seat.SeatReq;
 import fpt.trainining.movietheatre.dto.seat.SeatRes;
 import fpt.trainining.movietheatre.entity.CinemaRoom;
@@ -40,16 +40,14 @@ public class SeatMapper {
         return seat;
     }
 
-    public Seat map(SeatChangeTypeReq req) {
+    public Seat map(SeatIdReq req) {
         Optional<Seat> optionalSeat = repository.findById(req.getSeatId());
 
         if (!optionalSeat.isPresent()) {
             throw new ResourceNotFoundException("Can not find seat with id = " + req.getSeatId());
         }
-        Seat seat = optionalSeat.get();
-        seat.setSeatType(1 - seat.getSeatType());
 
-        return seat;
+        return optionalSeat.get();
     }
 
     public SeatRes map(Seat seat) {

@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class SeatChangeTypeReq {
+public class SeatIdReq {
     @NotNull
     private Integer seatId;
 }
