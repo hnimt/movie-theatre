@@ -1,7 +1,6 @@
 package fpt.trainining.movietheatre.dto.response;
 
 import fpt.trainining.movietheatre.entity.Movie;
-import fpt.trainining.movietheatre.entity.common.DayName;
 import lombok.Data;
 
 import java.time.LocalDate;
