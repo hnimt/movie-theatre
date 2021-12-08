@@ -13,15 +13,12 @@ public class MovieTheatreApplication {
     private final ShowDateService showDateService;
     private final ScheduleService scheduleService;
 
-    private final RoleService roleService;
-    private final AccountService accountService;
-
     public static void main(String[] args) {
         SpringApplication.run(MovieTheatreApplication.class, args);
     }
 
     @Bean
     public ApplicationStartupRunner schedulerRunner() {
-        return new ApplicationStartupRunner(typeService, showDateService, scheduleService, roleService, accountService);
+        return new ApplicationStartupRunner(typeService, showDateService, scheduleService);
     }
 }
