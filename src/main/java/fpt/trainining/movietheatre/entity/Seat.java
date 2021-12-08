@@ -15,6 +15,7 @@ public class Seat {
 
     @Id
     @Column(length = 10)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer seatId;
 
     @ManyToOne
