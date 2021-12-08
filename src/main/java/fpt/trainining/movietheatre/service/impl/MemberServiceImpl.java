@@ -56,7 +56,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public MemberRes createMember(MemberReq req) {
-        Account account = accountService.updateRole(req.getAccountId(), Roles.MEMBER.getRoleName());
+        Account account = accountService.updateRole(req.getAccountId(), Roles.MEMBER.roleName);
         Member member = mapper.map(req, Member.class);
         member.setAccount(account);
         member = memberRepository.save(member);

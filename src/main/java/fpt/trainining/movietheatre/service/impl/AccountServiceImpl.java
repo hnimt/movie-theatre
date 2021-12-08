@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
 
         if (req.getRoleName() == null) {
-            Role role = roleService.findByRoleName(Roles.CUSTOMER.getRoleName());
+            Role role = roleService.findByRoleName(Roles.CUSTOMER.roleName);
             account.setRole(role);
         } else {
             Role role = roleService.findByRoleName(req.getRoleName());
