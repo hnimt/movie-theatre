@@ -22,6 +22,6 @@ public class Schedule {
 
     private LocalTime scheduleTime;
 
-    @ManyToMany(mappedBy = "schedules")
-    private Collection<Movie> movies;
+//    @ManyToMany(mappedBy = "schedules")
+//    private Collection<Movie> movies;
 }

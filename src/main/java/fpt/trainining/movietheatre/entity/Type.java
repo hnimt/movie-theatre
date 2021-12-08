@@ -21,6 +21,6 @@ public class Type {
 
     private String typeName;
 
-    @ManyToMany(mappedBy = "types")
-    private Collection<Movie> movies;
+//    @ManyToMany(mappedBy = "types")
+//    private Collection<Movie> movies;
 }

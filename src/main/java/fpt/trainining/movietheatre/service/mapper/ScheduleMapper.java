@@ -20,7 +20,7 @@ public class ScheduleMapper {
 
         response.setScheduleId(schedule.getScheduleId());
         response.setScheduleTime(schedule.getScheduleTime());
-        response.setMovies(schedule.getMovies());
+//        response.setMovies(schedule.getMovies());
 
         return response;
     }

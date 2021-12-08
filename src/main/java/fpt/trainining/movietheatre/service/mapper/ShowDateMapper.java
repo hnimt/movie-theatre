@@ -22,7 +22,7 @@ public class ShowDateMapper {
         response.setShowDateId(showDate.getShowDateId());
         response.setShowDate(showDate.getShowDate());
         response.setDayName(showDate.getDayName());
-        response.setMovies(showDate.getMovies());
+//        response.setMovies(showDate.getMovies());
 
         return response;
     }

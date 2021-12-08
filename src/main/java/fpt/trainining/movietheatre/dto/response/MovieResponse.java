@@ -13,6 +13,8 @@ import java.util.Set;
 
 @Data
 public class MovieResponse {
+    private String movieId;
+
     private String actor;
 
     private Integer cinemaRoomId;
@@ -39,9 +41,7 @@ public class MovieResponse {
 
     private String smallImage;
 
-    private Set<LocalDate> showDates;
-
-    private Set<LocalTime> scheduleTimes;
-
-    private Set<String> typeNames;
+    private Collection<ShowDate> showDates;
+    private Collection<Schedule> schedules;
+    private Collection<Type> types;
 }
