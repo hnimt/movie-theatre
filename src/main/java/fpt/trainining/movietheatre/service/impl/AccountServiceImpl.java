@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +67,7 @@ public class AccountServiceImpl implements AccountService {
             account.setRole(role);
         }
 
+        account.setRegisterDate(LocalDate.now());
         Account createdAccount = accountRepository.save(account);
         AccountInfoRes accountInfoRes = accountMapper.accountToAccountInfoRes(createdAccount, new AccountInfoRes());
         return accountInfoRes;
