@@ -13,7 +13,11 @@ public class CinemaRoomMapper {
     private ModelMapper mapper;
 
     public CinemaRoom map(CinemaRoomReq req) {
-        return mapper.map(req, CinemaRoom.class);
+        CinemaRoom cinemaRoom = mapper.map(req, CinemaRoom.class);
+
+        cinemaRoom.setSeatQuantity(0);
+
+        return cinemaRoom;
     }
 
     public CinemaRoomRes map(CinemaRoom cinemaRoom) {
