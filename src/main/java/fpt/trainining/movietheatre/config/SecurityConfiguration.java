@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.config;
 
+import fpt.trainining.movietheatre.entity.common.Roles;
 import fpt.trainining.movietheatre.filter.JwtFilter;
 import fpt.trainining.movietheatre.security.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/role/**").permitAll()
+                .antMatchers("/api/v1/role/**").hasAuthority(Roles.ADMIN.roleName)
                 .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/api/v1/account/**").permitAll()
                 .anyRequest().authenticated()

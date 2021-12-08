@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeRes create(EmployeeReq req) {
-        Account account = accountService.updateRole(req.getAccountId(), Roles.EMPLOYEE.getRoleName());
+        Account account = accountService.updateRole(req.getAccountId(), Roles.EMPLOYEE.roleName);
         Employee employee = mapper.map(req, Employee.class);
         employee.setAccount(account);
         employee = employeeRepository.save(employee);
