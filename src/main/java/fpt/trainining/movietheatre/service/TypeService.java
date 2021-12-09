@@ -9,4 +9,6 @@ import java.util.List;
 public interface TypeService {
     ResponseEntity<List<TypeResponse>> getAll();
     ResponseEntity<TypeResponse> create(TypeRequest request);
+    ResponseEntity<TypeResponse> update(Integer id, TypeRequest request);
+    void deleteById(Integer id);
 }

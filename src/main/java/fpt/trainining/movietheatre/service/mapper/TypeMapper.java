@@ -19,4 +19,8 @@ public class TypeMapper {
     public TypeResponse map(Type type) {
         return mapper.map(type, TypeResponse.class);
     }
+
+    public void map(TypeRequest request, Type type) {
+        mapper.map(request, type);
+    }
 }

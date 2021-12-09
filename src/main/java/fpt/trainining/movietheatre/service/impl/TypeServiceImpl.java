@@ -3,6 +3,7 @@ package fpt.trainining.movietheatre.service.impl;
 import fpt.trainining.movietheatre.dto.request.TypeRequest;
 import fpt.trainining.movietheatre.dto.response.TypeResponse;
 import fpt.trainining.movietheatre.entity.Type;
+import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.TypeRepository;
 import fpt.trainining.movietheatre.service.TypeService;
 import fpt.trainining.movietheatre.service.mapper.TypeMapper;
@@ -18,6 +19,11 @@ import java.util.stream.Collectors;
 public class TypeServiceImpl implements TypeService {
     private final TypeMapper mapper;
     private final TypeRepository repository;
+
+    private Type findById(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find type with id = " + id));
+    }
 
     @Override
     public ResponseEntity<List<TypeResponse>> getAll() {
@@ -37,5 +43,18 @@ public class TypeServiceImpl implements TypeService {
         repository.save(type);
 
         return ResponseEntity.ok(mapper.map(type));
+    }
+
+    @Override
+    public ResponseEntity<TypeResponse> update(Integer id, TypeRequest request) {
+        Type type = findById(id);
+        mapper.map(request, type);
+        repository.save(type);
+        return ResponseEntity.ok(mapper.map(type));
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }
