@@ -35,7 +35,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberRes> findAll() {
+    public Member findById(String id) {
+        return null;
+    }
+
+    @Override
+    public List<MemberRes> getAll() {
         return memberRepository.findAll()
                 .stream()
                 .map((member -> {
@@ -47,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberRes findById(String id) {
+    public MemberRes getById(String id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot found member"));
         return memberToMemberRes(member);

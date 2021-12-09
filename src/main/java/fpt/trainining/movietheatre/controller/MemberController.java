@@ -19,7 +19,7 @@ public class MemberController {
 
     @GetMapping
     public ResponseEntity findAll() {
-        List<MemberRes> res = memberService.findAll();
+        List<MemberRes> res = memberService.getAll();
         return ResponseHandler.generateResponse("Find all members successfully!", HttpStatus.OK, res);
     }
 
@@ -31,7 +31,7 @@ public class MemberController {
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable String id){
-        MemberRes res = memberService.findById(id);
+        MemberRes res = memberService.getById(id);
         return ResponseHandler.generateResponse("Find member successfully!", HttpStatus.OK, res);
     }
 

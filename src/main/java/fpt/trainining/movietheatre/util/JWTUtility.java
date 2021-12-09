@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JWTUtility implements Serializable {
     private static final long serialVersionUID = 234234523523L;
 
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 30 * 60 * 60;
 
     @Value("${jwt.secret}")
     private String secretKey;
@@ -32,12 +32,10 @@ public class JWTUtility implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
-
 
     //for retrieving any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
@@ -58,7 +56,6 @@ public class JWTUtility implements Serializable {
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
-
     //while creating the token -
     //1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
     //2. Sign the JWT using the HS512 algorithm and secret key.
@@ -67,7 +64,6 @@ public class JWTUtility implements Serializable {
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secretKey).compact();
     }
-
 
     //validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
