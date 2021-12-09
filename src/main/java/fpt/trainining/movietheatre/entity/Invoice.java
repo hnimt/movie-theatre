@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "invoice")
@@ -31,13 +33,13 @@ public class Invoice {
     private Integer addScore;
 
     @Column(name = "booking_date")
-    private LocalDateTime bookingDate;
+    private LocalDate bookingDate;
 
     @Column(name = "movie_name")
     private String movieName;
 
     @Column(name = "schedule_show")
-    private LocalDateTime scheduleShow;
+    private LocalTime scheduleShow;
 
     @Column(name = "schedule_show_time")
     private String scheduleShowTime;
@@ -48,8 +50,8 @@ public class Invoice {
     @Column(name = "total_money", length = 19)
     private Integer totalMoney;
 
-    @Column(name = "user_score", length = 10)
-    private Integer userScore;
+    @Column(name = "use_score", length = 10)
+    private Integer useScore;
 
     @Column(name = "seat")
     private String seat;
