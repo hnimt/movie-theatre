@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.service.impl;
 
-import fpt.trainining.movietheatre.dto.request.ScheduleRequest;
-import fpt.trainining.movietheatre.dto.response.ScheduleResponse;
+import fpt.trainining.movietheatre.dto.schedule.ScheduleRequest;
+import fpt.trainining.movietheatre.dto.schedule.ScheduleResponse;
 import fpt.trainining.movietheatre.entity.Schedule;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ScheduleRepository;

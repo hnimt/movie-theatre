@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.service.mapper;
 
-import fpt.trainining.movietheatre.dto.request.ScheduleRequest;
-import fpt.trainining.movietheatre.dto.response.ScheduleResponse;
+import fpt.trainining.movietheatre.dto.schedule.ScheduleRequest;
+import fpt.trainining.movietheatre.dto.schedule.ScheduleResponse;
 import fpt.trainining.movietheatre.entity.Schedule;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

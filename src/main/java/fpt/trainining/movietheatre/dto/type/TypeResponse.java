@@ -1,4 +1,4 @@
-package fpt.trainining.movietheatre.dto.response;
+package fpt.trainining.movietheatre.dto.type;
 
 import fpt.trainining.movietheatre.entity.Movie;
 import lombok.Data;

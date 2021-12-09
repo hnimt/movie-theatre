@@ -1,4 +1,4 @@
-package fpt.trainining.movietheatre.dto.request;
+package fpt.trainining.movietheatre.dto.schedule;
 
 import lombok.Data;
 

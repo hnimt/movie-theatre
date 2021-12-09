@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.service.mapper;
 
-import fpt.trainining.movietheatre.dto.request.TypeRequest;
-import fpt.trainining.movietheatre.dto.response.TypeResponse;
+import fpt.trainining.movietheatre.dto.type.TypeRequest;
+import fpt.trainining.movietheatre.dto.type.TypeResponse;
 import fpt.trainining.movietheatre.entity.Type;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

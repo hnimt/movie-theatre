@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.service;
 
-import fpt.trainining.movietheatre.dto.request.MovieRequest;
-import fpt.trainining.movietheatre.dto.response.MovieResponse;
+import fpt.trainining.movietheatre.dto.movie.MovieRequest;
+import fpt.trainining.movietheatre.dto.movie.MovieResponse;
 import fpt.trainining.movietheatre.entity.Movie;
 import org.springframework.http.ResponseEntity;
 

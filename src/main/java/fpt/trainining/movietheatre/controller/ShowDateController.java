@@ -1,7 +1,7 @@
 package fpt.trainining.movietheatre.controller;
 
-import fpt.trainining.movietheatre.dto.request.ShowDateRequest;
-import fpt.trainining.movietheatre.dto.response.ShowDateResponse;
+import fpt.trainining.movietheatre.dto.show_date.ShowDateRequest;
+import fpt.trainining.movietheatre.dto.show_date.ShowDateResponse;
 import fpt.trainining.movietheatre.service.ShowDateService;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
