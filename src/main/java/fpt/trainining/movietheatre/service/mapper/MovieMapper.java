@@ -112,4 +112,8 @@ public class MovieMapper {
 
         return response;
     }
+
+    public void map(MovieRequest request, Movie movie) {
+        mapper.map(request, movie);
+    }
 }

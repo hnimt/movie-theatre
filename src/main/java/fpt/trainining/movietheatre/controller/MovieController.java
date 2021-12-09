@@ -23,9 +23,19 @@ public class MovieController {
         return service.getAll();
     }
 
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity<MovieResponse> getById(@PathVariable(value = "id") String id) {
+        return service.getById(id);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<MovieResponse> create(@RequestBody @Valid MovieRequest request) {
         return service.create(request);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<MovieResponse> update(@PathVariable(value = "id") String id, @RequestBody @Valid MovieRequest request) {
+        return service.update(id, request);
     }
 
     @DeleteMapping("/delete/{id}")
