@@ -23,12 +23,12 @@ public class ShowDateController {
         return service.getAll();
     }
 
-    @GetMapping("/get/{show-date}")
-    public ResponseEntity<List<ShowDateResponse>> getByShowDate(
-            @PathVariable("show-date")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate showDate
+    @GetMapping("/get-by-date/{date}")
+    public ResponseEntity<ShowDateResponse> getByDate(
+            @PathVariable("date")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
     ) {
-        return service.getByShowDate(showDate);
+        return service.getByDate(date);
     }
 
     @PostMapping("/create")

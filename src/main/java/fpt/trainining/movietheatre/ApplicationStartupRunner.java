@@ -17,8 +17,6 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class ApplicationStartupRunner implements CommandLineRunner {
     private final TypeService typeService;
-    private final ShowDateService showDateService;
-    private final ScheduleService scheduleService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,23 +28,6 @@ public class ApplicationStartupRunner implements CommandLineRunner {
         typeRequest.setTypeName("comedy");
         typeService.create(typeRequest);
 
-        ShowDateRequest showDateRequest = new ShowDateRequest();
-        showDateRequest.setShowDate(LocalDate.of(2021, 12, 10));
-        showDateService.create(showDateRequest);
-        showDateRequest.setShowDate(LocalDate.of(2021, 12, 11));
-        showDateService.create(showDateRequest);
-        showDateRequest.setShowDate(LocalDate.of(2021, 12, 12));
-        showDateService.create(showDateRequest);
-
-        ScheduleRequest scheduleRequest = new ScheduleRequest();
-        scheduleRequest.setScheduleTime(LocalTime.of(9, 0));
-        scheduleService.create(scheduleRequest);
-        scheduleRequest.setScheduleTime(LocalTime.of(11, 30));
-        scheduleService.create(scheduleRequest);
-        scheduleRequest.setScheduleTime(LocalTime.of(14, 0));
-        scheduleService.create(scheduleRequest);
-        scheduleRequest.setScheduleTime(LocalTime.of(20, 40));
-        scheduleService.create(scheduleRequest);
     }
 
 }

@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 @AllArgsConstructor
 public class MovieTheatreApplication {
     private final TypeService typeService;
-    private final ShowDateService showDateService;
-    private final ScheduleService scheduleService;
 
     public static void main(String[] args) {
         SpringApplication.run(MovieTheatreApplication.class, args);
@@ -19,6 +17,6 @@ public class MovieTheatreApplication {
 
     @Bean
     public ApplicationStartupRunner schedulerRunner() {
-        return new ApplicationStartupRunner(typeService, showDateService, scheduleService);
+        return new ApplicationStartupRunner(typeService);
     }
 }

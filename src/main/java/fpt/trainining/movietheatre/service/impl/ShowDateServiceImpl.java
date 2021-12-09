@@ -3,6 +3,7 @@ package fpt.trainining.movietheatre.service.impl;
 import fpt.trainining.movietheatre.dto.request.ShowDateRequest;
 import fpt.trainining.movietheatre.dto.response.ShowDateResponse;
 import fpt.trainining.movietheatre.entity.ShowDate;
+import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ShowDateRepository;
 import fpt.trainining.movietheatre.service.ShowDateService;
 import fpt.trainining.movietheatre.service.mapper.ShowDateMapper;
@@ -22,6 +23,11 @@ public class ShowDateServiceImpl implements ShowDateService {
     private final ShowDateMapper mapper;
     private final ShowDateRepository repository;
 
+    private ShowDate findByDate(LocalDate date) {
+        return repository.findShowDateByShowDate(date)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find show date with date = " + date));
+    }
+
     @Override
     public ResponseEntity<List<ShowDateResponse>> getAll() {
         List<ShowDate> showDates = repository.findAll();
@@ -34,14 +40,8 @@ public class ShowDateServiceImpl implements ShowDateService {
     }
 
     @Override
-    public ResponseEntity<List<ShowDateResponse>> getByShowDate(LocalDate showDate) {
-        List<ShowDate> showDates = repository.getShowDateByShowDate(showDate);
-
-        List<ShowDateResponse> responses = showDates.stream()
-                .map(mapper::map)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(responses);
+    public ResponseEntity<ShowDateResponse> getByDate(LocalDate date) {
+        return ResponseEntity.ok(mapper.map(findByDate(date)));
     }
 
     @Override

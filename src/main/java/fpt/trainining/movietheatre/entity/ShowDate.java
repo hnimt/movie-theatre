@@ -20,6 +20,7 @@ public class ShowDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer showDateId;
 
+    @Column(unique = true)
     private LocalDate showDate;
 
     private String dayName;

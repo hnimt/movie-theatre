@@ -10,7 +10,7 @@ import java.util.List;
 public interface ShowDateService {
     ResponseEntity<List<ShowDateResponse>> getAll();
 
-    ResponseEntity<List<ShowDateResponse>> getByShowDate(LocalDate showDate);
+    ResponseEntity<ShowDateResponse> getByDate(LocalDate date);
 
     ResponseEntity<ShowDateResponse> create(ShowDateRequest request);
 }
