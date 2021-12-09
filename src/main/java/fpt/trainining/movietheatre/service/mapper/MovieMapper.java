@@ -6,6 +6,7 @@ import fpt.trainining.movietheatre.entity.Movie;
 import fpt.trainining.movietheatre.entity.Schedule;
 import fpt.trainining.movietheatre.entity.ShowDate;
 import fpt.trainining.movietheatre.entity.Type;
+import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ScheduleRepository;
 import fpt.trainining.movietheatre.repository.ShowDateRepository;
 import fpt.trainining.movietheatre.repository.TypeRepository;
@@ -13,8 +14,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,21 +30,69 @@ public class MovieMapper {
     public Movie map(MovieRequest request) {
         Movie movie = mapper.map(request, Movie.class);
 
-        List<ShowDate> showDates = new ArrayList<>();
-        request.getShowDateId().stream().forEach(
-                showDateId -> {
-                    showDates.add(showDateRepository.findById(showDateId).get());
-                }
-        );
-        movie.setShowDates(showDates);
+        Set<LocalDate> showDates = request.getShowDates();
+        Set<LocalTime> schedules = request.getSchedules();
 
-        List<Schedule> schedules = new ArrayList<>();
-        request.getScheduleId().stream().forEach(
-                scheduleId -> {
-                    schedules.add(scheduleRepository.findById(scheduleId).get());
+        showDates.stream().forEach(
+                showDate -> {
+                    if (showDate.isBefore(request.getFromDate()) || showDate.isAfter(request.getToDate())) {
+                        throw new ResourceNotFoundException("There is a show date invalid");
+                    }
                 }
         );
-        movie.setSchedules(schedules);
+
+        Collection<ShowDate> showDateCollection = new ArrayList<>();
+        showDates.stream().forEach(
+                showDate -> {
+                    Optional<ShowDate> optionalShowDate = showDateRepository.findShowDateByShowDate(showDate);
+
+                    ShowDate showDateEntity = new ShowDate(showDate, showDate.getDayOfWeek().toString());
+                    if (!optionalShowDate.isPresent()) {
+                        showDateRepository.save(showDateEntity);
+                        showDateCollection.add(showDateEntity);
+                    }
+                    else {
+                        showDateCollection.add(optionalShowDate.get());
+                    }
+
+                }
+        );
+        movie.setShowDates(showDateCollection);
+
+        Collection<Schedule> scheduleCollection = new ArrayList<>();
+        schedules.stream().forEach(
+                schedule -> {
+                    Optional<Schedule> optionalSchedule = scheduleRepository.findScheduleByScheduleTime(schedule);
+
+                    Schedule scheduleEntity = new Schedule();
+                    scheduleEntity.setScheduleTime(schedule);
+                    if (!optionalSchedule.isPresent()) {
+                        scheduleRepository.save(scheduleEntity);
+                        scheduleCollection.add(scheduleEntity);
+                    }
+                    else {
+                        scheduleCollection.add(optionalSchedule.get());
+                    }
+
+                }
+        );
+        movie.setSchedules(scheduleCollection);
+
+//        List<ShowDate> showDates = new ArrayList<>();
+//        request.getShowDateId().stream().forEach(
+//                showDateId -> {
+//                    showDates.add(showDateRepository.findById(showDateId).get());
+//                }
+//        );
+//        movie.setShowDates(showDates);
+//
+//        List<Schedule> schedules = new ArrayList<>();
+//        request.getScheduleId().stream().forEach(
+//                scheduleId -> {
+//                    schedules.add(scheduleRepository.findById(scheduleId).get());
+//                }
+//        );
+//        movie.setSchedules(schedules);
 
         List<Type> types = new ArrayList<>();
         request.getTypeId().stream().forEach(
@@ -56,38 +106,8 @@ public class MovieMapper {
     }
 
     public MovieResponse map(Movie movie) {
-//        MovieResponse response = new MovieResponse();
-//
-//        response.setActor(movie.getActor());
-//        response.setCinemaRoomId(movie.getCinemaRoomId());
-//        response.setContent(movie.getContent());
-//        response.setDirector(movie.getDirector());
-//        response.setDuration(movie.getDuration());
-//        response.setFromDate(movie.getFromDate());
-//        response.setMovieProductionCompany(movie.getMovieProductionCompany());
-//        response.setToDate(movie.getToDate());
-//        response.setVersion(movie.getVersion());
-//        response.setMovieNameEnglish(movie.getMovieNameEnglish());
-//        response.setMovieNameVn(movie.getMovieNameVn());
-        MovieResponse response = mapper.map(movie, MovieResponse.class);
 
-//        response.setShowDates(
-//                movie.getShowDates().stream()
-//                        .map(showDate -> showDate.getShowDate())
-//                        .collect(Collectors.toSet())
-//        );
-//
-//        response.setScheduleTimes(
-//                movie.getSchedules().stream()
-//                        .map(schedule -> schedule.getScheduleTime())
-//                        .collect(Collectors.toSet())
-//        );
-//
-//        response.setTypeNames(
-//                movie.getTypes().stream()
-//                        .map(type -> type.getTypeName())
-//                        .collect(Collectors.toSet())
-//        );
+        MovieResponse response = mapper.map(movie, MovieResponse.class);
 
         return response;
     }

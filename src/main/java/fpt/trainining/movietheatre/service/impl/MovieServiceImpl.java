@@ -43,12 +43,10 @@ public class MovieServiceImpl implements MovieService {
     public ResponseEntity<MovieResponse> create(MovieRequest request) {
         Movie movie = mapper.map(request);
 
+        System.out.println();
+        System.out.println(movie);
+        System.out.println();
         repository.save(movie);
-//        movie.getShowDates().stream().forEach(
-//                showDate -> {
-//                    System.out.println(showDate.getShowDate());
-//                }
-//        );
 
         return ResponseEntity.ok(mapper.map(movie));
     }

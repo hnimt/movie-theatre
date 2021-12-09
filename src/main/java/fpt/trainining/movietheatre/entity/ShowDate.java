@@ -25,4 +25,9 @@ public class ShowDate {
 
 //    @ManyToMany(mappedBy = "showDates")
 //    private Collection<Movie> movies;
+
+    public ShowDate(LocalDate showDate, String dayName) {
+        this.showDate = showDate;
+        this.dayName = dayName;
+    }
 }
