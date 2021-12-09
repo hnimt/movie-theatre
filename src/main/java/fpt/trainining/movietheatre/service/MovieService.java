@@ -10,4 +10,5 @@ import java.util.List;
 public interface MovieService {
     ResponseEntity<List<MovieResponse>> getAll();
     ResponseEntity<MovieResponse> create(MovieRequest request);
+    void remove(String movieId);
 }

@@ -50,4 +50,9 @@ public class MovieServiceImpl implements MovieService {
 
         return ResponseEntity.ok(mapper.map(movie));
     }
+
+    @Override
+    public void remove(String movieId) {
+        repository.deleteById(movieId);
+    }
 }
