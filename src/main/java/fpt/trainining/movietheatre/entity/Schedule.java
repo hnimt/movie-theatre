@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,8 @@ public class Schedule {
 
     @Column(unique = true)
     private LocalTime scheduleTime;
+
+    @ManyToMany(mappedBy = "schedules")
+    @JsonIgnore
+    private Collection<Movie> movies;
 }

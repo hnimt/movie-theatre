@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,9 @@ public class ShowDate {
 
     private String dayName;
 
-//    @ManyToMany(mappedBy = "showDates")
-//    private Collection<Movie> movies;
+    @ManyToMany(mappedBy = "showDates")
+    @JsonIgnore
+    private Collection<Movie> movies;
 
     public ShowDate(LocalDate showDate, String dayName) {
         this.showDate = showDate;
