@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface CinemaRoomService {
     ResponseEntity<List<CinemaRoomRes>> getAll();
+    ResponseEntity<CinemaRoomRes> getById(Integer id);
     ResponseEntity<CinemaRoomRes> create(CinemaRoomReq req);
+    ResponseEntity<CinemaRoomRes> update(Integer id, CinemaRoomReq req);
+    void deleteById(Integer id);
 }

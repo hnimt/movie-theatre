@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,8 @@ public class Type {
 
     @Column(unique = true)
     private String typeName;
+
+    @ManyToMany(mappedBy = "types")
+    @JsonIgnore
+    private Collection<Movie> movies;
 }

@@ -23,4 +23,8 @@ public class CinemaRoomMapper {
     public CinemaRoomRes map(CinemaRoom cinemaRoom) {
         return mapper.map(cinemaRoom, CinemaRoomRes.class);
     }
+
+    public void map(CinemaRoomReq req, CinemaRoom cinemaRoom) {
+        mapper.map(req, cinemaRoom);
+    }
 }

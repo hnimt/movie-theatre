@@ -1,5 +1,6 @@
 package fpt.trainining.movietheatre.service.impl;
 
+import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.service.mapper.CinemaRoomMapper;
 import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomReq;
 import fpt.trainining.movietheatre.dto.cinema_room.CinemaRoomRes;
@@ -19,6 +20,11 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
     private final CinemaRoomMapper mapper;
     private final CinemaRoomRepository repository;
 
+    private CinemaRoom findById(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find cinema room with id = " + id));
+    }
+
     @Override
     public ResponseEntity<List<CinemaRoomRes>> getAll() {
         List<CinemaRoom> cinemaRooms = repository.findAll();
@@ -31,11 +37,28 @@ public class CinemaRoomServiceImpl implements CinemaRoomService {
     }
 
     @Override
+    public ResponseEntity<CinemaRoomRes> getById(Integer id) {
+        return ResponseEntity.ok(mapper.map(findById(id)));
+    }
+
+    @Override
     public ResponseEntity<CinemaRoomRes> create(CinemaRoomReq req) {
         CinemaRoom cinemaRoom = mapper.map(req);
 
         repository.save(cinemaRoom);
 
         return ResponseEntity.ok(mapper.map(cinemaRoom));
+    }
+
+    @Override
+    public ResponseEntity<CinemaRoomRes> update(Integer id, CinemaRoomReq req) {
+        CinemaRoom cinemaRoom = findById(id);
+        mapper.map(req, cinemaRoom);
+        return ResponseEntity.ok(mapper.map(cinemaRoom));
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 }

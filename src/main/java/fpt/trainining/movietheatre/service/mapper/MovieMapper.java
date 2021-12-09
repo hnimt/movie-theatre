@@ -6,6 +6,7 @@ import fpt.trainining.movietheatre.entity.Movie;
 import fpt.trainining.movietheatre.entity.Schedule;
 import fpt.trainining.movietheatre.entity.ShowDate;
 import fpt.trainining.movietheatre.entity.Type;
+import fpt.trainining.movietheatre.exception.InvalidRequestException;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ScheduleRepository;
 import fpt.trainining.movietheatre.repository.ShowDateRepository;
@@ -36,7 +37,7 @@ public class MovieMapper {
         showDates.stream().forEach(
                 showDate -> {
                     if (showDate.isBefore(request.getFromDate()) || showDate.isAfter(request.getToDate())) {
-                        throw new ResourceNotFoundException("There is a show date invalid");
+                        throw new InvalidRequestException("There is a show date invalid");
                     }
                 }
         );
@@ -110,5 +111,9 @@ public class MovieMapper {
         MovieResponse response = mapper.map(movie, MovieResponse.class);
 
         return response;
+    }
+
+    public void map(MovieRequest request, Movie movie) {
+        mapper.map(request, movie);
     }
 }
