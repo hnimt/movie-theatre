@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Data
@@ -40,10 +41,10 @@ public class MovieRequest {
     private String smallImage;
 
     @NotNull
-    private Set<Integer> showDateId;
+    private Set<LocalDate> showDates;
 
     @NotNull
-    private Set<Integer> scheduleId;
+    private Set<LocalTime> schedules;
 
     @NotNull
     private Set<Integer> typeId;
