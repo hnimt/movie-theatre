@@ -19,6 +19,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<?> invalidRequestException(InvalidRequestException exception, WebRequest request) {
+        ErrorResponse errorResponse =
+                new ErrorResponse(new Date(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     // handling global exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandling(Exception exception, WebRequest request){
