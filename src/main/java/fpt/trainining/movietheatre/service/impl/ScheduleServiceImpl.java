@@ -3,6 +3,7 @@ package fpt.trainining.movietheatre.service.impl;
 import fpt.trainining.movietheatre.dto.request.ScheduleRequest;
 import fpt.trainining.movietheatre.dto.response.ScheduleResponse;
 import fpt.trainining.movietheatre.entity.Schedule;
+import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ScheduleRepository;
 import fpt.trainining.movietheatre.service.ScheduleService;
 import fpt.trainining.movietheatre.service.mapper.ScheduleMapper;
@@ -37,5 +38,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         repository.save(schedule);
 
         return ResponseEntity.ok(mapper.map(schedule));
+    }
+
+    @Override
+    public Schedule findById(Integer scheduleId) {
+        return repository.findById(scheduleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found schedule"));
     }
 }

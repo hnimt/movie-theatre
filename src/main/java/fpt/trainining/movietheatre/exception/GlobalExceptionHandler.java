@@ -19,6 +19,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(NotEnoughMoneyException.class)
+    public ResponseEntity<?> notEnoughMoneyHandling(NotEnoughMoneyException exception, WebRequest request){
+        ErrorResponse errorResponse =
+                new ErrorResponse(new Date(), exception.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
+    }
+
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<?> invalidRequestException(InvalidRequestException exception, WebRequest request) {
         ErrorResponse errorResponse =

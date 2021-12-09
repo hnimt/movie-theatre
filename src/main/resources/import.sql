@@ -50,7 +50,7 @@ INSERT INTO movie_theatre.schedule(schedule_time) VALUES ('18:00:00');
 INSERT INTO movie_theatre.seat(seat_column, seat_row, seat_status, seat_type, cinema_room_id) VALUES ('A', 1, 0, 0, 1);
 INSERT INTO movie_theatre.seat(seat_column, seat_row, seat_status, seat_type, cinema_room_id) VALUES ('B', 1, 0, 0, 1);
 
-INSERT INTO movie_theatre.schedule_seat(schedule_seat_id, movie_id, schedule_id, seat_column, seat_id, seat_row, seat_status, seat_type, show_date_id) VALUES ('SS0001', 'MOV0001', 1, NULL, 1, NULL, 0, NULL, 1);
-INSERT INTO movie_theatre.schedule_seat(schedule_seat_id, movie_id, schedule_id, seat_column, seat_id, seat_row, seat_status, seat_type, show_date_id) VALUES ('SS0002', 'MOV0001', 1, NULL, 2, NULL, 0, NULL, 1);
+INSERT INTO movie_theatre.schedule_seat(schedule_seat_id, movie_id, schedule_id, seat_column, seat_id, seat_row, seat_status, seat_type, show_date_id) VALUES ('SS0001', 'MOV0001', 1, NULL, 1, NULL, 0, 0, 1);
+INSERT INTO movie_theatre.schedule_seat(schedule_seat_id, movie_id, schedule_id, seat_column, seat_id, seat_row, seat_status, seat_type, show_date_id) VALUES ('SS0002', 'MOV0001', 1, NULL, 2, NULL, 0, 1, 1);
 # INSERT INTO movie_theatre.test(name) VALUES ('test name 1');
 

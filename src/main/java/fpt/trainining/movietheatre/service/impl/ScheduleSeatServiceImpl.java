@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -39,4 +40,21 @@ public class ScheduleSeatServiceImpl implements ScheduleSeatService {
 
         return true;
     }
+
+    @Override
+    public List<ScheduleSeat> getScheduleSeatChangedStatus(String movieId, Integer showDateId, Integer scheduleId, String seatNamesString) {
+        List<Integer> seatIds = seatService.findIdBySeatName(seatNamesString);
+        return seatIds.stream().map(
+                seatId -> {
+                    ScheduleSeat scheduleSeat
+                            = repository.findScheduleSeatByMovieIdAndShowDateIdAndScheduleIdAndSeatId(movieId, showDateId, scheduleId, seatId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Cannot find"));
+
+                    scheduleSeat.setSeatStatus(1 - scheduleSeat.getSeatStatus());
+                    repository.save(scheduleSeat);
+                    return scheduleSeat;
+                }
+        ).collect(Collectors.toList());
+    }
+
 }

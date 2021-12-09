@@ -9,4 +9,6 @@ public interface ScheduleSeatService {
     List<ScheduleSeat> getByMovieShowDateSchedule(String movieId, Integer showDateId, Integer scheduleId);
 
     Boolean changeSeatStatus(String movieId, Integer showDateId, Integer scheduleId, String seatId);
+
+    List<ScheduleSeat> getScheduleSeatChangedStatus(String movieId, Integer showDateId, Integer scheduleId, String seatId);
 }

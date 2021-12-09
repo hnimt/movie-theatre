@@ -1,18 +1,16 @@
 package fpt.trainining.movietheatre.service.impl;
 
-import fpt.trainining.movietheatre.dto.invoice.InvoiceReq;
-import fpt.trainining.movietheatre.entity.Account;
-import fpt.trainining.movietheatre.entity.Invoice;
-import fpt.trainining.movietheatre.entity.Member;
+import fpt.trainining.movietheatre.dto.invoice.InvoiceConfirmReq;
+import fpt.trainining.movietheatre.entity.*;
+import fpt.trainining.movietheatre.exception.NotEnoughMoneyException;
 import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.InvoiceRepository;
-import fpt.trainining.movietheatre.service.AccountService;
-import fpt.trainining.movietheatre.service.InvoiceService;
-import fpt.trainining.movietheatre.service.MemberService;
+import fpt.trainining.movietheatre.service.*;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,9 +18,13 @@ import java.util.List;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
-    private final AccountService accountService;
     private final MemberService memberService;
-    private final ModelMapper mapper;
+    private final MovieService movieService;
+    private final ScheduleService scheduleService;
+    private final ShowDateService showDateService;
+    private final ScheduleSeatService scheduleSeatService;
+    private final TicketService ticketService;
+    private final AccountService accountService;
 
     @Override
     public List<Invoice> findAll() {
@@ -37,20 +39,66 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<Invoice> findByAccountId(String accountId) {
-        return invoiceRepository.findByAccountId(accountId);
+        return invoiceRepository.findByAccountId(accountId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found invoices"));
     }
 
     @Override
-    public Invoice create(InvoiceReq invoiceReq) {
-//        Invoice invoice = mapper.map(invoiceReq, Invoice.class);
-//        Member member = memberService.
-//        if (invoiceReq.getIsUseScore().equals(0)) {
-//            invoice.setAccount(account);
-//            return invoiceRepository.save(invoice);
-//        } else {
-//
-//        }
+    public List<Invoice> findByAccountName(String accountName) {
+        Account account = accountService.findByUsername(accountName);
+        return invoiceRepository.findByAccount(account)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found invoices"));
+    }
 
-        return new Invoice();
+    /**
+     * Confirm invoice from InvoiceConfirmReq return Invoice
+     * @param req
+     * @return Invoice
+     */
+    @Override
+    @Transactional
+    public Invoice confirmInvoice(InvoiceConfirmReq req) {
+        Invoice invoice = new Invoice();
+        Member member = memberService.findById(req.getMemberId());
+        Movie movie = movieService.findById(req.getMovieId());
+        ShowDate showDate = showDateService.findById(req.getShowTimeId());
+        Schedule schedule = scheduleService.findById(req.getScheduleId());
+        List<ScheduleSeat> scheduleSeats = scheduleSeatService.getScheduleSeatChangedStatus(req.getMovieId(), req.getShowTimeId(), req.getScheduleId(), req.getSeatNamesString());
+        Account account = member.getAccount();
+
+
+        invoice.setAccount(account);
+        invoice.setAddScore(req.getAddScore());
+        invoice.setBookingDate(LocalDate.now());
+        invoice.setMovieName(movie.getMovieNameVn());
+        invoice.setScheduleShow(showDate.getShowDate());
+        invoice.setScheduleShowTime(schedule.getScheduleTime().toString());
+        invoice.setStatus(0);
+        invoice.setSeat(req.getSeatNamesString());
+
+        int total = 0;
+        for (ScheduleSeat scheduleSeat : scheduleSeats) {
+            Ticket ticket = ticketService.findByType(scheduleSeat.getSeatType());
+            total += ticket.getPrice();
+        }
+
+        invoice.setTotalMoney(total);
+        invoice.setAddScore(req.getAddScore());
+
+        if (!req.getIsUseScore()) {
+            invoice.setUseScore(0);
+            member.setScore(member.getScore() + req.getAddScore());
+            memberService.save(member);
+        } else {
+            if (member.getScore() < total)
+                throw new NotEnoughMoneyException("Not enough money");
+            else {
+                invoice.setUseScore(member.getScore());
+                member.setScore(member.getScore() + req.getAddScore() - member.getScore());
+                memberService.save(member);
+            }
+        }
+
+        return invoiceRepository.save(invoice);
     }
 }

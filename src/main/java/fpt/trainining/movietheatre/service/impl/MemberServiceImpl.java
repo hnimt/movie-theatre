@@ -36,7 +36,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member findById(String id) {
-        return null;
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found member"));
     }
 
     @Override
@@ -56,6 +57,11 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot found member"));
         return memberToMemberRes(member);
+    }
+
+    @Override
+    public Member save(Member member) {
+        return memberRepository.save(member);
     }
 
     @Override

@@ -52,4 +52,10 @@ public class ShowDateServiceImpl implements ShowDateService {
 
         return ResponseEntity.ok(mapper.map(showDate));
     }
+
+    @Override
+    public ShowDate findById(Integer showDateId) {
+        return repository.findById(showDateId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found show date"));
+    }
 }
