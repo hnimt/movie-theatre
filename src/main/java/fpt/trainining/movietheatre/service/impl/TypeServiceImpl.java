@@ -25,6 +25,16 @@ public class TypeServiceImpl implements TypeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot find type with id = " + id));
     }
 
+    private Type findByTypeName(String typeName) {
+        return repository.findTypeByTypeName(typeName)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find type with name = " + typeName));
+    }
+
+    private List<Type> findTypeContains(String string) {
+        return repository.findTypeContains(string)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot find type with name containing = " + string));
+    }
+
     @Override
     public ResponseEntity<List<TypeResponse>> getAll() {
         List<Type> types = repository.findAll();
@@ -34,6 +44,20 @@ public class TypeServiceImpl implements TypeService {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(typeResponses);
+    }
+
+    @Override
+    public ResponseEntity<TypeResponse> getByTypeName(String typeName) {
+        return ResponseEntity.ok(mapper.map(findByTypeName(typeName)));
+    }
+
+    @Override
+    public ResponseEntity<List<TypeResponse>> getTypeContains(String string) {
+        return ResponseEntity.ok(
+                findTypeContains(string).stream()
+                        .map(mapper::map)
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override

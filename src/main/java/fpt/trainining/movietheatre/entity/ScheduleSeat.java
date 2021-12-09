@@ -26,6 +26,9 @@ public class ScheduleSeat {
 
     private String movieId;
 
+    @Column
+    private Integer showDateId;
+
     @Column(length = 10)
     private Integer scheduleId;
 

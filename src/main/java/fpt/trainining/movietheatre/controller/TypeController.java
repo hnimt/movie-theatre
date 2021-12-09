@@ -23,6 +23,16 @@ public class TypeController {
         return service.getAll();
     }
 
+    @GetMapping("/get-by-name/{name}")
+    public ResponseEntity<TypeResponse> getByTypeName(@PathVariable String name) {
+        return service.getByTypeName(name);
+    }
+
+    @GetMapping("/get-type-contains/{string}")
+    public ResponseEntity<List<TypeResponse>> getTypeContains(@PathVariable String string) {
+        return service.getTypeContains(string);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<TypeResponse> create(@RequestBody @Valid TypeRequest request) {
         return service.create(request);

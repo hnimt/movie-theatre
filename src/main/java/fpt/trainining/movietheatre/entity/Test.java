@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 public class Test {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
