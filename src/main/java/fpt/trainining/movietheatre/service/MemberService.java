@@ -11,6 +11,8 @@ public interface MemberService {
     MemberRes getById(String id);
     Member findById(String id);
     //    MemberRes findMemberByName();
+
+    Member save(Member member);
     MemberRes createMember(MemberReq req);
     MemberRes updateMember(String id, MemberReq req);
     void deleteById(String id);

@@ -45,4 +45,16 @@ public class TicketServiceImpl implements TicketService {
     public void deleteById(Integer id) {
         ticketRepository.deleteById(id);
     }
+
+    @Override
+    public Ticket findByPrice(Integer price) {
+        return ticketRepository.findTicketByPrice(price)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found ticket"));
+    }
+
+    @Override
+    public Ticket findByType(Integer type) {
+        return ticketRepository.findTicketByTicketType(type)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found ticket"));
+    }
 }

@@ -8,16 +8,16 @@ import java.time.LocalTime;
 
 @NoArgsConstructor
 @Data
-public class InvoiceReq {
+public class InvoiceConfirmReq {
     private String memberId;
     private Integer addScore;
     private LocalDate bookingDate;
-    private String movieName;
-    private LocalTime scheduleShow;
-    private String scheduleShowTime;
+    private String movieId;
+    private Integer scheduleId;
+    private Integer showTimeId;
     private Integer status;
-    private Integer totalMoney;
-    private Integer isUseScore;
-    private Integer useScore;
-    private String seat;
+//    private Integer totalMoney;
+    private String promotionId;
+    private Boolean isUseScore;
+    private String seatNamesString;
 }

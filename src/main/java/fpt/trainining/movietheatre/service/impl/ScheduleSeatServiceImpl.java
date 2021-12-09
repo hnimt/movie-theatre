@@ -42,8 +42,8 @@ public class ScheduleSeatServiceImpl implements ScheduleSeatService {
     }
 
     @Override
-    public List<ScheduleSeat> getScheduleSeatChangedStatus(String movieId, Integer showDateId, Integer scheduleId, String seatIdString) {
-        List<Integer> seatIds = seatService.findIdBySeatName(seatIdString);
+    public List<ScheduleSeat> getScheduleSeatChangedStatus(String movieId, Integer showDateId, Integer scheduleId, String seatNamesString) {
+        List<Integer> seatIds = seatService.findIdBySeatName(seatNamesString);
         return seatIds.stream().map(
                 seatId -> {
                     ScheduleSeat scheduleSeat
@@ -56,4 +56,5 @@ public class ScheduleSeatServiceImpl implements ScheduleSeatService {
                 }
         ).collect(Collectors.toList());
     }
+
 }

@@ -8,4 +8,6 @@ public interface TicketService {
     Ticket create(TicketReq req);
     Ticket update(Integer id, TicketReq req);
     void deleteById(Integer id);
+    Ticket findByPrice(Integer price);
+    Ticket findByType(Integer type);
 }

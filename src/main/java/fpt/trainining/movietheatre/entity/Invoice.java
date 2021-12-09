@@ -39,7 +39,7 @@ public class Invoice {
     private String movieName;
 
     @Column(name = "schedule_show")
-    private LocalTime scheduleShow;
+    private LocalDate scheduleShow;
 
     @Column(name = "schedule_show_time")
     private String scheduleShowTime;
