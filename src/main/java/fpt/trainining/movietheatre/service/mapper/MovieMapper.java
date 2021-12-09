@@ -1,13 +1,12 @@
 package fpt.trainining.movietheatre.service.mapper;
 
-import fpt.trainining.movietheatre.dto.request.MovieRequest;
-import fpt.trainining.movietheatre.dto.response.MovieResponse;
+import fpt.trainining.movietheatre.dto.movie.MovieRequest;
+import fpt.trainining.movietheatre.dto.movie.MovieResponse;
 import fpt.trainining.movietheatre.entity.Movie;
 import fpt.trainining.movietheatre.entity.Schedule;
 import fpt.trainining.movietheatre.entity.ShowDate;
 import fpt.trainining.movietheatre.entity.Type;
 import fpt.trainining.movietheatre.exception.InvalidRequestException;
-import fpt.trainining.movietheatre.exception.ResourceNotFoundException;
 import fpt.trainining.movietheatre.repository.ScheduleRepository;
 import fpt.trainining.movietheatre.repository.ShowDateRepository;
 import fpt.trainining.movietheatre.repository.TypeRepository;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor

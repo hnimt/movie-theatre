@@ -1,7 +1,6 @@
 package fpt.trainining.movietheatre.controller;
 
-import fpt.trainining.movietheatre.dto.request.TestReq;
-import fpt.trainining.movietheatre.entity.Schedule;
+import fpt.trainining.movietheatre.dto.test.TestReq;
 import fpt.trainining.movietheatre.entity.ScheduleSeat;
 import fpt.trainining.movietheatre.service.ScheduleSeatService;
 import fpt.trainining.movietheatre.service.SeatService;

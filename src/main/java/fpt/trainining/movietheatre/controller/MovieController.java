@@ -1,8 +1,8 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.ResponseHandler;
-import fpt.trainining.movietheatre.dto.request.MovieRequest;
-import fpt.trainining.movietheatre.dto.response.MovieResponse;
+import fpt.trainining.movietheatre.dto.movie.MovieRequest;
+import fpt.trainining.movietheatre.dto.movie.MovieResponse;
 import fpt.trainining.movietheatre.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
