@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MovieServiceImpl implements MovieService {
     private final MovieMapper mapper;
-    private final ModelMapper modelMapper;
     private final MovieRepository repository;
 
     public List<Movie> findAll() {
@@ -46,6 +45,23 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = findById(id);
 
         return ResponseEntity.ok(mapper.map(movie));
+    }
+
+    @Override
+    public ResponseEntity<MovieResponse> getByEnglishName(String name) {
+        Movie movie = repository.findMovieByMovieNameEnglish(name)
+                .orElseThrow(() -> new ResourceNotFoundException("Can not find any movies with english name = " + name));
+        return ResponseEntity.ok(mapper.map(movie));
+    }
+
+    @Override
+    public ResponseEntity<List<MovieResponse>> getMoviesEnglishNameContains(String string) {
+        List<Movie> movies = repository.getMoviesEnglishNameContains(string)
+                .orElseThrow(() -> new ResourceNotFoundException("Can not find any movies with english name containing " + string));
+
+        return ResponseEntity.ok(movies.stream()
+                .map(mapper::map)
+                .collect(Collectors.toList()));
     }
 
     @Override
