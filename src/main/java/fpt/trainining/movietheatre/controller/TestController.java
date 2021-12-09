@@ -1,6 +1,7 @@
 package fpt.trainining.movietheatre.controller;
 
 import fpt.trainining.movietheatre.dto.request.TestReq;
+import fpt.trainining.movietheatre.entity.Schedule;
 import fpt.trainining.movietheatre.entity.ScheduleSeat;
 import fpt.trainining.movietheatre.service.ScheduleSeatService;
 import fpt.trainining.movietheatre.service.SeatService;
@@ -32,5 +33,10 @@ public class TestController {
     public ResponseEntity<List<Integer>> testSth2(@PathVariable String seatNames) {
         System.out.println(seatNames);
         return ResponseEntity.ok(seatService.findIdBySeatName(seatNames));
+    }
+
+    @PostMapping("/sth3")
+    public ResponseEntity<List<ScheduleSeat>> testSth3(@RequestBody @Valid TestReq req) {
+        return ResponseEntity.ok(service.getScheduleSeatChangedStatus(req.getMovieId(), req.getShowDateId(), req.getScheduleId(), req.getSeatIdString()));
     }
 }
