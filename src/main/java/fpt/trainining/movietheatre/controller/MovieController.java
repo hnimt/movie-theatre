@@ -28,6 +28,16 @@ public class MovieController {
         return service.getById(id);
     }
 
+    @GetMapping("/get-by-english-name/{name}")
+    public ResponseEntity<MovieResponse> getByEnglishName(@PathVariable String name) {
+        return service.getByEnglishName(name);
+    }
+
+    @GetMapping("/get-movies-english-name-contains/{string}")
+    public ResponseEntity<List<MovieResponse>> getMoviesEnglishNameContains(@PathVariable String string) {
+        return service.getMoviesEnglishNameContains(string);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<MovieResponse> create(@RequestBody @Valid MovieRequest request) {
         return service.create(request);
