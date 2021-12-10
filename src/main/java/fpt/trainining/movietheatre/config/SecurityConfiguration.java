@@ -24,6 +24,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired private UserDetailService userDetailService;
     @Autowired private JwtFilter jwtFilter;
 
+    private static final String[] movieAntPatterns = {"/api/v1/movie/**", "/api/v1/show-date/**", "/api/v1/schedule/**", "/api/v1/type/**"};
+    private static final String[] adminAndEmployeeAuthorities = {Roles.EMPLOYEE.roleName, Roles.ADMIN.roleName};
+
     @Bean
     public static PasswordEncoder passwordEncoder() {
         PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -47,6 +50,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/account/**").permitAll()
                 .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/invoice/**").hasAuthority(Roles.MEMBER.roleName)
+
+                .antMatchers(HttpMethod.GET, movieAntPatterns).permitAll()
+                .antMatchers(movieAntPatterns).hasAnyAuthority(adminAndEmployeeAuthorities)
+
+                .antMatchers("/api/v1/cinema-room/**", "api/v1/seat/**").hasAnyAuthority(adminAndEmployeeAuthorities)
+
+                .antMatchers(HttpMethod.GET, "/api/v1/schedule-seat/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
