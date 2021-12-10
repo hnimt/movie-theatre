@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, String> {
-    @Query(nativeQuery = true, value = "SELECT * FROM invoice i WHERE i.account_id = ?1")
+    @Query("select i from Invoice i where i.account.accountId = ?1")
     Optional<List<Invoice>> findByAccountId(String accountId);
 
     Optional<List<Invoice>> findByAccount(Account account);
