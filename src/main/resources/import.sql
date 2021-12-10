@@ -44,9 +44,26 @@ INSERT INTO `movie_theatre`.`type`(type_name) VALUES ('War');
 INSERT INTO `movie_theatre`.`type`(type_name) VALUES ('Adventure');
 INSERT INTO `movie_theatre`.`type`(type_name) VALUES ('Fantasy');
 
-INSERT INTO movie_theatre.movie(movie_id, actor) VALUES ('MOV0001', 'A');
-INSERT INTO movie_theatre.show_dates(show_date) VALUES ('2022-03-18');
+INSERT INTO movie_theatre.movie(movie_id, actor, cinema_room_id, content, director, duration, from_date, large_image, movie_name_english, movie_name_vn, movie_production_company, small_image, to_date, version) VALUES ('MOV0001', 'Timothée Chalamet, Rebecca Ferguson, Zendaya', 1, NULL, 'Denis Villeneuve', 156, '2021-12-01', NULL, 'Dune', 'DUNE: HÀNH TINH CÁT', NULL, NULL, '2022-03-01', NULL);
+
+INSERT INTO movie_theatre.show_dates(show_date) VALUES ('2022-01-01');
+INSERT INTO movie_theatre.show_dates(show_date) VALUES ('2022-29-12');
+
+INSERT INTO movie_theatre.schedule(schedule_time) VALUES ('06:00:00');
+INSERT INTO movie_theatre.schedule(schedule_time) VALUES ('09:00:00');
+INSERT INTO movie_theatre.schedule(schedule_time) VALUES ('12:30:00');
 INSERT INTO movie_theatre.schedule(schedule_time) VALUES ('18:00:00');
+
+INSERT INTO movie_theatre.movie_date(movie_id, show_date_id) VALUES ('MOV0001', 1);
+INSERT INTO movie_theatre.movie_date(movie_id, show_date_id) VALUES ('MOV0001', 7);
+
+INSERT INTO movie_theatre.movie_schedule(movie_id, schedule_id) VALUES ('MOV0001', 1);
+INSERT INTO movie_theatre.movie_schedule(movie_id, schedule_id) VALUES ('MOV0001', 3);
+
+INSERT INTO movie_theatre.movie_type(movie_id, type_id) VALUES ('MOV0001', 2);
+INSERT INTO movie_theatre.movie_type(movie_id, type_id) VALUES ('MOV0001', 3);
+INSERT INTO movie_theatre.movie_type(movie_id, type_id) VALUES ('MOV0001', 14);
+
 INSERT INTO movie_theatre.seat(seat_column, seat_row, seat_status, seat_type, cinema_room_id) VALUES ('A', 1, 0, 0, 1);
 INSERT INTO movie_theatre.seat(seat_column, seat_row, seat_status, seat_type, cinema_room_id) VALUES ('B', 1, 0, 0, 1);
 
