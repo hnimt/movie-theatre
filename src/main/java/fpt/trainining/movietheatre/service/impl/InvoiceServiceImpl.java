@@ -57,15 +57,14 @@ public class InvoiceServiceImpl implements InvoiceService {
      */
     @Override
     @Transactional
-    public Invoice confirmInvoice(InvoiceConfirmReq req) {
+    public Invoice confirmInvoice(InvoiceConfirmReq req, String username) {
         Invoice invoice = new Invoice();
-        Member member = memberService.findById(req.getMemberId());
+        Account account = accountService.findByUsername(username);
+        Member member = memberService.findByAccount(account);
         Movie movie = movieService.findById(req.getMovieId());
         ShowDate showDate = showDateService.findById(req.getShowTimeId());
         Schedule schedule = scheduleService.findById(req.getScheduleId());
         List<ScheduleSeat> scheduleSeats = scheduleSeatService.getScheduleSeatChangedStatus(req.getMovieId(), req.getShowTimeId(), req.getScheduleId(), req.getSeatNamesString());
-        Account account = member.getAccount();
-
 
         invoice.setAccount(account);
         invoice.setAddScore(req.getAddScore());

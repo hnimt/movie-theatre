@@ -90,4 +90,10 @@ public class MemberServiceImpl implements MemberService {
         mapper.map(req, member);
         return memberToMemberRes(member);
     }
+
+    @Override
+    public Member findByAccount(Account account) {
+        return memberRepository.findByAccount(account)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot found this member"));
+    }
 }

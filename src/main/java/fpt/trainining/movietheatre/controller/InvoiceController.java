@@ -28,8 +28,9 @@ public class InvoiceController {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody InvoiceConfirmReq req) {
-        Invoice res = invoiceService.confirmInvoice(req);
+    public ResponseEntity create(@RequestBody InvoiceConfirmReq req, Principal principal) {
+        String username = principal.getName();
+        Invoice res = invoiceService.confirmInvoice(req, username);
         return ResponseHandler.generateResponse("Create invoice successfully!", HttpStatus.CREATED, res);
     }
 }

@@ -2,6 +2,7 @@ package fpt.trainining.movietheatre.service;
 
 import fpt.trainining.movietheatre.dto.member.MemberReq;
 import fpt.trainining.movietheatre.dto.member.MemberRes;
+import fpt.trainining.movietheatre.entity.Account;
 import fpt.trainining.movietheatre.entity.Member;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface MemberService {
     MemberRes createMember(MemberReq req);
     MemberRes updateMember(String id, MemberReq req);
     void deleteById(String id);
+
+    Member findByAccount(Account account);
 }
